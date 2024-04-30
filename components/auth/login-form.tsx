@@ -71,7 +71,7 @@ export function LoginForm() {
 
     return (
         <CardWrapper
-            headerLabel="Bienvenido"
+            headerLabel=""
             backButtonLabel="¿No estas registrado?"
             backButtonHref="/auth/register"
             showSocial
@@ -131,7 +131,7 @@ export function LoginForm() {
                                     name="password"
                                     render={({ field }) => (
                                         <FormItem>
-                                            <FormLabel>Password</FormLabel>
+                                            <FormLabel>Contraseña</FormLabel>
                                             <FormControl>
                                                 <div className="relative">
                                                     <Input
@@ -152,7 +152,7 @@ export function LoginForm() {
                                                 className="px-0 font-normal"
                                             >
                                                 <Link href="/auth/reset">
-                                                    Forgot password?
+                                                    ¿Olvidaste tú constraseña?
                                                 </Link>
                                             </Button>
 
