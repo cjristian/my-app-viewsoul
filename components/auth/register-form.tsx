@@ -52,7 +52,7 @@ export function RegisterForm() {
             headerLabel=""
             backButtonLabel="Ya tengo una cuenta"
             backButtonHref="/auth/login"
-            showSocial
+
         >
             <Form {...form}>
                 <form

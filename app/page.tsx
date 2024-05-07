@@ -1,7 +1,8 @@
-import Link from 'next/link';
 import { ArrowRightIcon } from '@heroicons/react/24/outline';
 import { lugrasimo } from "@/components/fonts/lugrasimo";
 import { signikaNegative } from "@/components/fonts/signika";
+import { LoginButton } from '@/components/auth/login-button';
+import { Button } from '@/components/ui/button';
 
 
 export default function Home() {
@@ -20,12 +21,11 @@ export default function Home() {
             </h2>
           </div>
           <div className="flex justify-center mt-8 md:mt-0">
-            <Link
-              href="/auth/login"
-              className="flex items-center gap-5 self-center rounded-lg bg-red-500 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-red-400 md:text-base"
-            >
+            <LoginButton mode="modal" asChild>
+              <Button variant="outline" className='flex items-center gap-5 self-center rounded-lg bg-red-500 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-red-400 md:text-base' size="lg">
               <span>Inicia Sesion</span> <ArrowRightIcon className="w-5 md:w-6" />
-            </Link>
+              </Button>
+            </LoginButton>
           </div>
         </div>
       </div>

@@ -31,7 +31,7 @@ export function LoginForm() {
     const searchParams = useSearchParams()
     const urlError = searchParams.get("error") ===
         "OAuthAccountNotLinked"
-        ? "Email already in use with differrent provider!"
+        ? "El email está siendo usado por otro proveedor"
         : "";
 
     const [showTwoFactor, setShowTwoFactor] = useState(false);
@@ -65,7 +65,7 @@ export function LoginForm() {
                         setShowTwoFactor(true);
                     }
                 })
-                .catch(() => setError("Something went wrong"));
+                .catch(() => setError("Algo ha ido mal"));
         });
     };
 
