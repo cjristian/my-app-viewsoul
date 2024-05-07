@@ -23,7 +23,7 @@ export function UserButton() {
     <DropdownMenu>
       <DropdownMenuTrigger>
         <Avatar>
-          <AvatarImage src={user?.image || ""} />
+          <AvatarImage  src={user?.image || ""}  height="50" width="50"/>
           <AvatarFallback>
             <FaUser />
           </AvatarFallback>

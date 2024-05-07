@@ -28,14 +28,14 @@ export const login = async (
 ) => {
     const validatedFields = LoginSchema.safeParse(values)
     if (!validatedFields.success) {
-        return { error: "Invalid fields!" };
+        return { error: "Credenciales incorrectas" };
 
     }
     const { email, password, code } = validatedFields.data
 
     const existingUser = await getUserByEmail(email)
     if (!existingUser || !existingUser.email || !existingUser.password) {
-        return { error: "Email does not exist!" };
+        return { error: "Email no existe" };
     }
 
     if (!existingUser.emailVerified) {
@@ -45,24 +45,24 @@ export const login = async (
             verificationToken.token
 
         );
-        return { success: "Confirmation email sent!" }
+        return { success: "Enviado confirmación de email" }
     }
 
     if (existingUser.isTwoFactorEnabled && existingUser.email) {
         if (code) {
             const twoFastorToken = await getTwoFactorTokenByEmail(existingUser.email)
             if (!twoFastorToken) {
-                return { error: "Invalid code!" }
+                return { error: "Codigo inválido" }
             }
 
             if (twoFastorToken.token !== code) {
-                return { error: "Invalid code!" }
+                return { error: "Código inválido" }
             }
 
             const hasExpired = new Date(twoFastorToken.expires) < new Date()
 
             if (hasExpired) {
-                return { error: "Code has expired!" }
+                return { error: "Codigo expirado" }
             }
             await db.twoFactorToken.delete({
                 where: { id: twoFastorToken.id }
@@ -103,9 +103,9 @@ export const login = async (
         if (error instanceof AuthError) {
             switch (error.type) {
                 case "CredentialsSignin":
-                    return { error: "Invalid credentials" };
+                    return { error: "Credenciales incorrectas" };
                 default:
-                    return { error: "Something went wrong" };
+                    return { error: "Algo ha salido mal" };
             }
 
         }
