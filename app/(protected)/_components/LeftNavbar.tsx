@@ -1,96 +1,60 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 
-import { Button } from "@/components/ui/button";
-import { UserButton } from "@/components/auth/user-button";
+import { ExitIcon } from "@radix-ui/react-icons";
+
 import { cn } from "@/lib/utils";
 import { lugrasimo } from "@/components/fonts/lugrasimo";
 import { useCurrentUser } from "@/hooks/use-current-user";
-import { LogoutButton } from "@/components/auth/logout-button";
-import { ExitIcon } from "@radix-ui/react-icons";
 import Menu from "./Menu";
-
+import { logout } from "@/actions/logout";
 
 export default function LeftNavbar() {
     const user = useCurrentUser();
-    const pathname = usePathname();
+    const onClick = () => {
+        logout();
+    }
     return (
-        // <nav className="bg-secondary flex justify-between
-        //  items-center p-4 rounded-xl w-[600px] shadow-sm" >
-        //     <div className="flex gap-x-2">
-        //         <Button
-        //             asChild
-        //             variant={pathname === "/server" ? "default" : "outline"}
-        //         >
-        //             <Link href="/server">
-        //                 Server
-        //             </Link>
+        <nav className="flex h-full flex-col px-3 py-4 md:px-2">
 
-        //         </Button>
-        //         <Button
-        //             asChild
-        //             variant={pathname === "/client" ? "default" : "outline"}
-        //         >
-        //             <Link href="/client">
-        //                 Client
-        //             </Link>
-
-        //         </Button>
-
-        //         <Button
-        //             asChild
-        //             variant={pathname === "/settings" ? "default" : "outline"}
-        //         >
-        //             <Link href="/settings">
-        //                 Opciones
-        //             </Link>
-        //         </Button>
-
-        //     </div>
-        //     <UserButton />
-        // </nav>
-        <div className="h-screen left-0 top-0 sticky overflow-auto px-10 py-6 flex flex-col gap-6 max-md:hidden custom-scrollbar">
-            <Link href="/settings">
-                <h1 className={cn("text-4xl font-semibold", lugrasimo.className)}>
-                    <strong>View<span className='text-red-600'>Soul</span></strong></h1>
+            <Link
+                href="/home-view"
+                className="mb-2 flex h-20 items-end justify-start rounded-md bg-red-50  p-4 md:h-40"
+            >
+                <div className="w-32 md:w-40">
+                    <h1 className={cn("text-4xl font-semibold", lugrasimo.className)}>
+                        <strong>View<span className='text-red-600'>Soul</span></strong></h1>
+                    {/* <UserButton />
+                    <p className="text-small-bold">{user?.name}</p> */}
+                </div>
             </Link>
-            <div className="flex flex-col gap-2 ">
-                <div className="flex flex-col gap-2 items-center text-black">
-                    <UserButton />
-                    <p className="text-small-bold">{user?.name}</p>
-                </div>
-                <div className="flex text-black justify-between">
-                    <div className="flex flex-col items-center">
-                        <p className="text-lg">1</p>
-                        <p className="text-sm">Posts</p>
+            <div className="flex grow flex-row justify-between space-x-2 md:flex-col md:space-x-0 md:space-y-2">
+                {/* <div className="flex ">
+                    <div className="flex content-center">
+                    <p className="text-lg">1</p>
+                    <p className="text-sm">Posts</p>
                     </div>
-                    <div className="flex flex-col items-center">
-                        <p className="text-lg">0</p>
-                        <p className="text-sm">Followers</p>
-                    </div>
-                    <div className="flex flex-col items-center">
-                        <p className="text-lg">1</p>
-                        <p className="text-sm">Following</p>
-                    </div>
-                </div>
-                <hr />
+                    <p className="text-lg">0</p>
+                    <p className="text-sm">Followers</p>
+                    <p className="text-lg">1</p>
+                    <p className="text-sm">Following</p>
+                </div> */}
+
                 <Menu />
-                <hr />
+                <div className="hidden h-auto w-full grow rounded-md bg-gray-50 md:block"></div>
                 
-                <div className="flex gap-4 items-center">
-                    <UserButton />
-                    <strong><p className="text-black">Mange Account</p></strong>
-                </div>
-                <div className="flex  gap-4 items-center">
-                    <LogoutButton>
-                        <ExitIcon  height="32px" width="32px" />
-                    </LogoutButton>
-                    <p>Salir de sessión</p>
+                <div>
+                    <button
+                        className="flex h-[48px] w-full grow items-center justify-center gap-2 rounded-md bg-gray-50 p-3 text-sm font-medium hover:bg-red-100 hover:text-red-600 md:flex-none md:justify-start md:p-2 md:px-3"
+                        onClick={onClick}
+                    >
+                        <ExitIcon height="32px" width="32px" className="w-6" />
+                        <div className="hidden md:block">Cerrear Sesión</div>
+                    </button>
                 </div>
             </div>
-        </div>
+        </nav>
     )
 
 }

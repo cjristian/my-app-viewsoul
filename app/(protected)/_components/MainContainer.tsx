@@ -18,15 +18,26 @@ export default function ManinContainer({ children }: { children: React.ReactNode
 
     const title = pageTitles.find((page) => page.url === firstPath)?.title || "";
     return (
-        <section className="felx flex-col flex-1 max-w-3xl px-4 md:px-10 lg:px-4 xl:px-20">
-            <Topbar />
-            <div className="mt-6 mb-20">
-                <h1 className="mb-5 text-black max-sm:text-black">{title}</h1>
-                <div className="h-screen ">
+        <div className="flex-grow p-6 md:overflow-y-auto md:p-12">
+
+            <div className="w-full">
+                <div className="flex w-full items-center justify-between">
+                    <h1 className="text-2xl">{title}</h1>
+                </div>
+                <div className="mt-4 flex items-center justify-between gap-2 md:mt-8">
+                    {/* <Topbar /> */}
+                </div>
+                {/*  <Suspense key={query + currentPage} fallback={<InvoicesTableSkeleton />}>
+                     <Table query={query} currentPage={currentPage} />
+                </Suspense> */}
+                <div className="mt-5 flex w-full justify-center">
                     {children}
                 </div>
             </div>
-        </section>
+        </div>
+
+
+
     )
 
 }

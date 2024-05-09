@@ -24,7 +24,7 @@ export default function Topbar() {
             <Button
                 variant="secondary"
                 size="lg"
-                onClick={() => router.push("/create-psot")}
+                onClick={() => router.push("/create-post")}
             >
                 Crear un post
             </Button>
