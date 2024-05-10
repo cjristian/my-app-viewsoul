@@ -9,6 +9,7 @@ import { lugrasimo } from "@/components/fonts/lugrasimo";
 import { useCurrentUser } from "@/hooks/use-current-user";
 import Menu from "./Menu";
 import { logout } from "@/actions/logout";
+import { UserButton } from "@/components/auth/user-button";
 
 export default function LeftNavbar() {
     const user = useCurrentUser();
@@ -25,8 +26,8 @@ export default function LeftNavbar() {
                 <div className="w-32 md:w-40">
                     <h1 className={cn("text-4xl font-semibold", lugrasimo.className)}>
                         <strong>View<span className='text-red-600'>Soul</span></strong></h1>
-                    {/* <UserButton />
-                    <p className="text-small-bold">{user?.name}</p> */}
+                    <UserButton />
+                    <p className="text-small-bold">{user?.name}</p>
                 </div>
             </Link>
             <div className="flex grow flex-row justify-between space-x-2 md:flex-col md:space-x-0 md:space-y-2">

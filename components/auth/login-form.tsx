@@ -75,7 +75,7 @@ export function LoginForm() {
             headerLabel=""
             backButtonLabel="¿No estas registrado?"
             backButtonHref="/auth/register"
-            showSocial
+            // showSocial
         >
             <Form {...form}>
                 <form

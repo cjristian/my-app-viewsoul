@@ -14,7 +14,7 @@ export default function ProtectedLayaout({ children }: ProtectedLayaoutProps) {
             <MainContainer>
                 {children}
             </MainContainer>
-            {/* <RightNavbar /> */}
+            <RightNavbar />
         </div>
     )
 }
