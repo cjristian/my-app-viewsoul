@@ -16,6 +16,7 @@ export default function LeftNavbar() {
     const onClick = () => {
         logout();
     }
+    console.log(user)
     return (
         <nav className="flex h-full flex-col px-3 py-4 md:px-2">
 
@@ -27,7 +28,7 @@ export default function LeftNavbar() {
                     <h1 className={cn("text-4xl font-semibold", lugrasimo.className)}>
                         <strong>View<span className='text-red-600'>Soul</span></strong></h1>
                     <UserButton />
-                    <p className="text-small-bold">{user?.name}</p>
+                    <p className="text-small-bold">{user?.lastname}</p>
                 </div>
             </Link>
             <div className="flex grow flex-row justify-between space-x-2 md:flex-col md:space-x-0 md:space-y-2">

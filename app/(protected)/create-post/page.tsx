@@ -14,3 +14,10 @@ export default  function ClientPage() {
     )
 
 }
+
+
+// export default function CreatePostPage(){
+//   return (
+//     <div className="pt-6">POST</div>
+//   )
+// }

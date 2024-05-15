@@ -1,5 +1,5 @@
 import NextAuth from "next-auth";
-import { UserRole } from "@prisma/client";
+import { Gender, UserRole } from "@prisma/client";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 
 import { db } from "@/lib/db";
@@ -55,7 +55,7 @@ export const { handlers: { GET, POST }, auth, signIn, signOut
             }
 
             if (session.user) {
-                session.user.name = token.name ;
+                session.user.name = token.name;
                 session.user.email = token.email as string;
                 session.user.isOAuth = token.isOAuth as boolean;
             }
@@ -73,7 +73,7 @@ export const { handlers: { GET, POST }, auth, signIn, signOut
             const existingAccount = await getAccountByUserId(
                 existingUser.id
             )
-            
+
             token.isOAuth = !!existingAccount;
             token.name = existingUser.name;
             token.email = existingUser.email;

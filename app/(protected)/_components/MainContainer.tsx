@@ -22,7 +22,7 @@ export default function ManinContainer({ children }: { children: React.ReactNode
                     <h1 className="text-2xl">{title}</h1>
                 </div>
                 <div className="mt-4 flex items-center justify-between gap-2 md:mt-8">
-                    <Topbar />
+                    {/* <Topbar /> */}
                 </div>
                 {/*  <Suspense key={query + currentPage} fallback={<InvoicesTableSkeleton />}>
                      <Table query={query} currentPage={currentPage} />

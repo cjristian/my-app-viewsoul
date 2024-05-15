@@ -20,15 +20,16 @@ enum Gender {
 }
 
 enum FriendStatus {
-  PENDING
-  ACCEPTED
-  BLOCKED
+  ACCEPTADO
+  PENDIENTE
+  RECHAZADO
+
 }
 
 model Estado {
   id          Int           @id @default(autoincrement())
-  descripcion String
-  amistades   Firendships[]
+  state       FriendStatus?
+  Friendships Friendships[]
 }
 
 model User {
@@ -47,13 +48,15 @@ model User {
   isTwoFactorEnabled    Boolean                @default(false)
   twoFactorConfirmation TwoFactorConfirmation?
 
-  enviado  Firendships[] @relation("UsuarioEnvia")
-  recibido Firendships[] @relation("UsuarioRecibe")
-  posts    Post[]
-  comments Comment[]
+  enviado   Friendships[] @relation("UsuarioEnvia")
+  recibido  Friendships[] @relation("UsuarioRecibe")
+  posts     Post[]
+  comments  Comment[]
+  followers Follow[]      @relation("Followed")
+  following Follow[]      @relation("Follower")
 }
 
-model Firendships {
+model Friendships {
   id             Int      @id @default(autoincrement())
   usuarioEnvia   User     @relation("UsuarioEnvia", fields: [usuarioId1], references: [id])
   usuarioId1     String
@@ -110,6 +113,16 @@ model Account {
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
+}
+
+model Follow {
+  id         Int    @id @default(autoincrement())
+  follower   User   @relation("Follower", fields: [followerId], references: [id])
+  followerId String
+  followed   User   @relation("Followed", fields: [followedId], references: [id])
+  followedId String
+
+  @@unique([followerId, followedId])
 }
 
 model VerificationToken {
