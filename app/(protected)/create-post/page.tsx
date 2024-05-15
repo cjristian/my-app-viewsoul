@@ -1,23 +1,23 @@
-"use client"
-import { UserInfo } from "@/components/user-info";
-import { useCurrentUser } from "@/hooks/use-current-user"
 
-export default  function ClientPage() {
-    const user =  useCurrentUser();
+import Posting from "../_components/Posting"
+import { CreateForm } from "../_components/createpost-form"
+
+export default function CreatePost() {
     return (
-        <div>
-            <UserInfo
-                label="Client Component"
-                user={user}
-            />
+        <div className="w-screen  ">
+            <CreateForm />
         </div>
     )
 
 }
+{/* // const user =  useCurrentUser();
+// return (
+//     <div>
+//         <UserInfo
+//             label="Client Component"
+//             user={user}
+//         />
+//     </div>
+// ) */}
 
 
-// export default function CreatePostPage(){
-//   return (
-//     <div className="pt-6">POST</div>
-//   )
-// }

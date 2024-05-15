@@ -13,7 +13,7 @@ export const SettingsSchema = z.object({
         if (data.password && !data.newPassword) {
             return false;
         }
-       
+
         return true;
 
     }, {
@@ -65,3 +65,13 @@ export const RegisterSchema = z.object({
         message: "¿Cuál es tu nombre?"
     })
 });
+
+export const CreateFormSchema = z.object({
+    photo: z.string().optional(),
+    text: z.string().optional(),
+}).refine((data) => {
+    return data.photo !== undefined || data.text !== undefined;
+}, {
+    message: "Debes proporcionar al menos una foto o un texto",
+});
+
