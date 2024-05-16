@@ -14,7 +14,10 @@ export default function ProtectedLayaout({ children }: ProtectedLayaoutProps) {
             <MainContainer>
                 {children}
             </MainContainer>
-            <RightNavbar />
+            <div className="w-full flex-none md:w-64 ">
+                <RightNavbar />
+            </div>
+
         </div>
     )
 }

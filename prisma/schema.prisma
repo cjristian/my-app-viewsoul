@@ -19,16 +19,8 @@ enum Gender {
   OTRO
 }
 
-enum FriendStatus {
-  ACCEPTADO
-  PENDIENTE
-  RECHAZADO
-
-}
-
 model Estado {
   id          Int           @id @default(autoincrement())
-  state       FriendStatus?
   Friendships Friendships[]
 }
 
@@ -70,21 +62,20 @@ model Friendships {
 }
 
 model Post {
-  id        Int      @id @default(autoincrement())
-  userId    String   @map("id_user")
-  content   String?
-  createdAt DateTime @default(now()) @map("created_at")
-
-  // Relations
-  user     User      @relation(fields: [userId], references: [id], onDelete: Cascade)
-  comments Comment[]
+  id        String    @id @default(cuid())
+  userId    String    @map("id_user")
+  postText  String?
+  postImage String?
+  createdAt DateTime  @default(now()) @map("created_at")
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  comments  Comment[]
 
   @@map("post")
 }
 
 model Comment {
   id        Int      @id @default(autoincrement())
-  postId    Int      @map("id_post")
+  postId    String   @map("id_post")
   userId    String   @map("id_user")
   content   String?
   createdAt DateTime @default(now()) @map("created_at")

@@ -1,5 +1,4 @@
 
-import Posting from "../_components/Posting"
 import { CreateForm } from "../_components/createpost-form"
 
 export default function CreatePost() {
@@ -10,14 +9,5 @@ export default function CreatePost() {
     )
 
 }
-{/* // const user =  useCurrentUser();
-// return (
-//     <div>
-//         <UserInfo
-//             label="Client Component"
-//             user={user}
-//         />
-//     </div>
-// ) */}
 
 

@@ -10,6 +10,24 @@ export const SettingsSchema = z.object({
     newPassword: z.optional(z.string().min(6)),
 })
     .refine((data) => {
+        if (!data.name) {
+            return false;
+        }
+        return true;
+    }, {
+        message: "El nombre es obligatorio",
+        path: ["name"]
+    })
+    .refine((data) => {
+        if (!data.email) {
+            return false;
+        }
+        return true;
+    }, {
+        message: "El correo electrónico es obligatorio",
+        path: ["email"]
+    })
+    .refine((data) => {
         if (data.password && !data.newPassword) {
             return false;
         }
@@ -67,6 +85,7 @@ export const RegisterSchema = z.object({
 });
 
 export const CreateFormSchema = z.object({
+    userId: z.string(), 
     photo: z.string().optional(),
     text: z.string().optional(),
 }).refine((data) => {
