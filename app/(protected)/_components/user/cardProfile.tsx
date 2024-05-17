@@ -12,21 +12,9 @@ export default function CardProfile() {
         profilePic: "https://via.placeholder.com/150",
     };
 
-    const userPosts = [
-        {
-            id: 1,
-            content: "¡Hola mundo!",
-            date: "2024-05-16",
-        },
-        {
-            id: 2,
-            content: "Estoy disfrutando de mi día.",
-            date: "2024-05-17",
-        },
-    ];
+   
 
     return (
-        <div className="bg-gray-100 p-4 rounded-lg shadow-md flex flex-col md:flex-col items-center w-full h-full">
             <div className="flex flex-col items-center md:flex-row w-full h-full">
                 <div className="mb-4 md:mb-0 mr-10">
                     <img
@@ -45,16 +33,5 @@ export default function CardProfile() {
                     <p className="text-lg mb-2"><strong>País:</strong> {userProfile.country}</p>
                 </div>
             </div>
-
-            <div className="w-full mt-4 h-full">
-                <h2 className="text-xl font-semibold mb-4">Mis Publicaciones</h2>
-                {userPosts.map((post) => (
-                    <div key={post.id} className="bg-white p-4 rounded-lg shadow-md mb-4">
-                        <p className="text-lg">{post.content}</p>
-                        <p className="text-gray-500 text-sm mt-2">{post.date}</p>
-                    </div>
-                ))}
-            </div>
-        </div>
     );
 }
