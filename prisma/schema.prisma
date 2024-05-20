@@ -28,7 +28,7 @@ model User {
   id                    String                 @id @default(cuid())
   name                  String?
   lastname              String?
-  birthdate             DateTime?
+  birthdate             String?
   country               String?
   gender                Gender?
   email                 String?                @unique

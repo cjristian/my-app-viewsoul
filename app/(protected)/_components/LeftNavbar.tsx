@@ -29,6 +29,7 @@ export default function LeftNavbar() {
                     <UserButton />
                     <p className="text-small-bold">{user?.name}</p>
                 </div>
+                
             </Link>
             <div className="flex grow flex-row justify-between space-x-2 md:flex-col md:space-x-0 md:space-y-2">
                 {/* <div className="flex ">

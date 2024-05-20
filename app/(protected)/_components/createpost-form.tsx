@@ -73,7 +73,7 @@ export function CreateForm() {
                     if (data?.success) {
                         form.reset();
                         setSuccess(data.success);
-                        router.push('/home-view')
+                        router.push('/profile')
 
                     }
                 })

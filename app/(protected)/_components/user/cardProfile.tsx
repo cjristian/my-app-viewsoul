@@ -1,37 +1,54 @@
 "use client";
-import { useCurrentUser } from "@/hooks/use-current-user";
 
-export default function CardProfile() {
-    const user = useCurrentUser();
-    const userProfile = {
-        firstName: "John",
-        lastName: "Doedasdasdsadas",
-        gender: "Male",
-        birthday: "1990-01-01",
-        country: "United States",
-        profilePic: "https://via.placeholder.com/150",
-    };
+import { useEffect, useState } from "react";
 
-   
+import { profileUser } from "@/data/profileUser";
+import { formatDate } from "@/app/(protected)/_functions/formData";
+import { capitalizeFirstLetter } from "@/app/(protected)/_functions/upperLetter";
+import { PostProfileProps, ProfileUser } from "@/interfaces/user";
 
+
+export default function CardProfile({ id }: PostProfileProps) {
+
+    const [userFeatures, setUser] = useState<ProfileUser[]>([]);
+    useEffect(() => {
+        async function fetchUser() {
+            try {
+                const user = await profileUser(id);
+                setUser(user);
+            } catch (error) {
+                console.error("Error fetching posts:", error);
+
+            }
+        }
+        fetchUser();
+    }, [id]);
     return (
-            <div className="flex flex-col items-center md:flex-row w-full h-full">
-                <div className="mb-4 md:mb-0 mr-10">
+        <div className="flex flex-col items-center md:flex-row w-full h-full">
+            <div className="mb-4 md:mb-0 mr-10">
+                {userFeatures.map((value) => (
                     <img
-                        src={userProfile.profilePic}
+                        key={value.id}
+                        src={value.image ? value.image : "https://via.placeholder.com/150"}
                         alt="Foto de perfil"
                         className="w-32 h-32 md:w-40 md:h-40 rounded-full border-4 border-white shadow-md"
                     />
-                </div>
-
-                <div className="flex flex-col items-start w-full h-full">
-                    <h1 className="text-3xl font-bold mb-2">
-                        {user?.name} {userProfile.lastName}
-                    </h1>
-                    <p className="text-lg mb-2"><strong>Género:</strong> {userProfile.gender}</p>
-                    <p className="text-lg mb-2"><strong>Fecha de Nacimiento:</strong> {userProfile.birthday}</p>
-                    <p className="text-lg mb-2"><strong>País:</strong> {userProfile.country}</p>
-                </div>
+                ))}
             </div>
+
+            <div className="flex flex-col items-start w-full h-full">
+                {userFeatures.map((value) => (
+                    <div key={value.id}>
+                        <h1 className="text-3xl font-bold mb-2">
+                            {value.name} {value.lastname}
+                        </h1>
+                        <p className="text-lg mb-2"><strong>Género:</strong> {capitalizeFirstLetter(value.gender)}</p>
+                        <p className="text-lg mb-2"><strong>Fecha de Nacimiento:</strong> {value.birthdate ? formatDate(value.birthdate) : "No hay fecha disponible"}</p>
+                        <p className="text-lg mb-2"><strong>País:</strong> {value.country}</p>
+                    </div>
+                ))}
+
+            </div>
+        </div>
     );
 }

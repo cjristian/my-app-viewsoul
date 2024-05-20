@@ -1,9 +1,11 @@
 "use client";
 import { useEffect, useState } from "react";
+import Image from 'next/image'
+
+import MiniCardProfile from "./miniCardProfile";
 import { PostProfileProps, Post } from "@/interfaces/user";
 import { getPostUser } from "@/data/postUser";
 import { getImagePath } from "@/utils/index";
-import Image from 'next/image'
 
 
 export default function PostProfile({ id }: PostProfileProps) {
@@ -27,6 +29,7 @@ export default function PostProfile({ id }: PostProfileProps) {
             <h2 className="text-xl font-semibold mb-4">Mis Publicaciones</h2>
             {userPosts.map((post) => (
                 <div key={post.id} className="bg-white p-4 rounded-lg shadow-md mb-4">
+                    <MiniCardProfile id={id} />
                     <p className="text-lg">{post.postText}</p>
                     {post.postImage && (
                         <Image
