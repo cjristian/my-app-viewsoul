@@ -1,45 +1,27 @@
-"use client";
-
-import { LogoutButton } from "@/components/auth/logout-button";
-import { UserButton } from "@/components/auth/user-button";
-import { Button } from "@/components/ui/button";
-import { ExitIcon } from "@radix-ui/react-icons";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { useState } from "react"
-
-export default function Topbar() {
-    const router = useRouter();
-    const [search, setSearch] = useState("")
-
-    return (
-        <div className="flex justify-between items-center mt-6">
-            <div className="relative">
-                <input type="text"
-                    className="w-full bg-dark py-3 px-5 rounded-lg focus:outline-none text-dark"
-                    placeholder="Buscar personas, post ..."
-                    onChange={(e) => setSearch(e.target.value)}
-                />
-            </div>
-            <Button
-                variant="secondary"
-                size="lg"
-                onClick={() => router.push("/create-post")}
-            >
-                Crear un post
-            </Button>
-            <div className="flex gap-3">
-                <div className="flex  cursor-pointer items-center md:hidden">
-                    <LogoutButton>
-                        <ExitIcon height="32px" width="32px" />
-                    </LogoutButton>
-
-                    <Link href="/">
-                        <UserButton />
-                    </Link>
-                </div>
-            </div>
-
-        </div>
-    )
+import Pagination from '@/app/ui/invoices/pagination';
+import Search from '@/app/ui/search';
+import Table from '@/app/ui/invoices/table';
+import { CreateInvoice } from '@/app/ui/invoices/buttons';
+import { lusitana } from '@/app/ui/fonts';
+import { InvoicesTableSkeleton } from '@/app/ui/skeletons';
+import { Suspense } from 'react';
+ 
+export default async function Page() {
+  return (
+    <div className="w-full">
+      <div className="flex w-full items-center justify-between">
+        <h1 className={`${lusitana.className} text-2xl`}>Invoices</h1>
+      </div>
+      <div className="mt-4 flex items-center justify-between gap-2 md:mt-8">
+        <Search placeholder="Search invoices..." />
+        <CreateInvoice />
+      </div>
+      {/*  <Suspense key={query + currentPage} fallback={<InvoicesTableSkeleton />}>
+        <Table query={query} currentPage={currentPage} />
+      </Suspense> */}
+      <div className="mt-5 flex w-full justify-center">
+        {/* <Pagination totalPages={totalPages} /> */}
+      </div>
+    </div>
+  );
 }

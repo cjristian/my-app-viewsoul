@@ -1,7 +1,6 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import Topbar from "./Topbar";
 import { pageTitles } from "@/app/(protected)/_functions/rutsMenu"
 
 
@@ -15,24 +14,19 @@ export default function ManinContainer({ children }: { children: React.ReactNode
 
     const title = pageTitles.find((page) => page.url === firstPath)?.title || "";
     return (
-        <div className="flex-grow p-6 md:overflow-y-auto md:p-12">
+        <div className="flex-grow p-6 overflow-auto md:p-12">
 
             <div className="w-full">
                 <div className="flex w-full items-center justify-between">
                     <h1 className="text-2xl">{title}</h1>
                 </div>
-                <div className="mt-4 flex items-center justify-between gap-2 md:mt-8">
-                    {/* <Topbar /> */}
-                </div>
-                {/*  <Suspense key={query + currentPage} fallback={<InvoicesTableSkeleton />}>
-                     <Table query={query} currentPage={currentPage} />
-                </Suspense> */}
+
                 <div className="mt-5 flex w-full justify-center">
                     {children}
                 </div>
             </div>
         </div>
-        
+
 
 
 

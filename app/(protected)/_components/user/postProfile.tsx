@@ -37,6 +37,7 @@ export default function PostProfile({ id }: PostProfileProps) {
                             alt="Post Image"
                             width={300}
                             height={200}
+                            priority={true}
                             className="mt-2 max-w-full h-auto"
                         />
                     )}

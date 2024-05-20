@@ -1,6 +1,10 @@
 import { db } from "@/lib/db"
+import { unstable_noStore as noStore } from 'next/cache';
+
 
 export const getPasswordResetTokenByToken = async (token: string) => {
+    noStore();
+
     try {
         const passwordResetToken = await db.passwordResetToken.findUnique({
             where: {

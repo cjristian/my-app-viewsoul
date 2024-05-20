@@ -26,10 +26,12 @@ export default function LeftNavbar() {
                 <div className="w-32 md:w-40">
                     <h1 className={cn("text-4xl font-semibold", lugrasimo.className)}>
                         <strong>View<span className='text-red-600'>Soul</span></strong></h1>
-                    <UserButton />
-                    <p className="text-small-bold">{user?.name}</p>
+                    <div className="flex content-center justify-center text-center">
+                        <UserButton />
+                        <p className="text-small-bold">{user?.name}</p>
+                    </div>
                 </div>
-                
+
             </Link>
             <div className="flex grow flex-row justify-between space-x-2 md:flex-col md:space-x-0 md:space-y-2">
                 {/* <div className="flex ">
@@ -45,7 +47,7 @@ export default function LeftNavbar() {
 
                 <Menu />
                 <div className="hidden h-auto w-full grow rounded-md bg-gray-50 md:block"></div>
-                
+
                 <div>
                     <button
                         className="flex h-[48px] w-full grow items-center justify-center gap-2 rounded-md bg-gray-50 p-3 text-sm font-medium hover:bg-red-100 hover:text-red-600 md:flex-none md:justify-start md:p-2 md:px-3"

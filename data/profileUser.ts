@@ -1,7 +1,10 @@
 "use server";
 import { db } from "@/lib/db";
+import { unstable_noStore as noStore } from 'next/cache';
+
 
 export const profileUser = async (id: string) => {
+    noStore();
     try {
         const posts = await db.user.findMany({
             where: {
