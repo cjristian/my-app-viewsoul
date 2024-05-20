@@ -1,8 +1,8 @@
 "use client";
 
 import { useCurrentUser } from "@/hooks/use-current-user";
-import CardProfile from "../_components/user/cardProfile";
-import PostProfile from "../_components/user/postProfile";
+import CardProfile from "@/app/(protected)/_components/user/cardProfile";
+import PostProfile from "@/app/(protected)/_components/user/postProfile";
 
 export default function ProfilePage() {
     const user = useCurrentUser();

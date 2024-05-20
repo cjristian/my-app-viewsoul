@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from "react";
 
+import Image from 'next/image'
+
 import { profileUser } from "@/data/profileUser";
 import { formatDate } from "@/app/(protected)/_functions/formData";
 import { capitalizeFirstLetter } from "@/app/(protected)/_functions/upperLetter";
@@ -25,12 +27,15 @@ export default function CardProfile({ id }: PostProfileProps) {
     }, [id]);
     return (
         <div className="flex flex-col items-center md:flex-row w-full h-full">
+
             <div className="mb-4 md:mb-0 mr-10">
                 {userFeatures.map((value) => (
-                    <img
+                    <Image
                         key={value.id}
-                        src={value.image ? value.image : "https://via.placeholder.com/150"}
+                        src={value.image ? value.image : ""}
                         alt="Foto de perfil"
+                        width={150}
+                        height={150}
                         className="w-32 h-32 md:w-40 md:h-40 rounded-full border-4 border-white shadow-md"
                     />
                 ))}

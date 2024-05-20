@@ -1,8 +1,12 @@
 "use client";
+
+import Link from 'next/link'
 import { useState, useEffect } from 'react';
+
 import { fetchFilteredUser } from "@/data/fetchFilteredUser";
 import { User } from '@/interfaces/user';
 import { useCurrentUser } from '@/hooks/use-current-user';
+import { profile } from 'console';
 
 
 export default function UserTable({
@@ -19,7 +23,7 @@ export default function UserTable({
 
     useEffect(() => {
         async function fetchData() {
-            if (idUser?.id) { // Comprobamos si idUser tiene un valor antes de usarlo
+            if (idUser?.id) {
                 const fetchedUsers: User[] = await fetchFilteredUser(query, currentPage, idUser.id);
                 setUsers(fetchedUsers);
             }
@@ -38,7 +42,11 @@ export default function UserTable({
                     <img src={user.image ? user.image : ""} className="w-10 h-10 rounded-full mr-4" />
                     <div>
                         <h3 className="font-semibold">{user.name} {user.lastname}</h3>
-                        <p className="text-sm text-gray-500">{user.country}</p>
+                        <Link
+                        href={`/profile/${user.id}`}
+                        >
+                            <p className="text-sm text-gray-500">{user.country}</p>
+                        </Link>
                     </div>
                     <button onClick={() => handleFollow(user.id)} className="ml-auto px-4 py-2 rounded bg-blue-500 text-white hover:bg-blue-600 focus:outline-none">Seguir</button>
                 </div>
