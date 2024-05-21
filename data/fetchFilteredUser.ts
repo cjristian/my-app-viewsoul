@@ -11,7 +11,6 @@ export const fetchFilteredUser = async (query: string, currentPage: number, excl
     try {
         const users = await db.user.findMany({
             where: {
-                // Agregamos una condición para excluir al usuario con el ID específico
                 AND: [
                     {
                         OR: [

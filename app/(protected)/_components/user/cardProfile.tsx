@@ -32,11 +32,11 @@ export default function CardProfile({ id }: PostProfileProps) {
                 {userFeatures.map((value) => (
                     <Image
                         key={value.id}
-                        src={value.image ? value.image : ""}
+                        src={value.image ? value.image : "https://via.placeholder.com/150"}
                         alt="Foto de perfil"
                         width={150}
                         height={150}
-                        className="w-32 h-32 md:w-40 md:h-40 rounded-full border-4 border-white shadow-md"
+                        className="w-42 h-42 md:w-60 md:h-50 rounded-full border-4 border-white shadow-md"
                     />
                 ))}
             </div>

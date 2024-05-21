@@ -19,10 +19,10 @@ enum Gender {
   OTRO
 }
 
-model Estado {
-  id          Int           @id @default(autoincrement())
-  Friendships Friendships[]
-}
+// model Estado {
+//   id          Int           @id @default(autoincrement())
+//   Friendships Friendships[]
+// }
 
 model User {
   id                    String                 @id @default(cuid())
@@ -40,53 +40,58 @@ model User {
   isTwoFactorEnabled    Boolean                @default(false)
   twoFactorConfirmation TwoFactorConfirmation?
 
-  enviado   Friendships[] @relation("UsuarioEnvia")
-  recibido  Friendships[] @relation("UsuarioRecibe")
-  posts     Post[]
-  comments  Comment[]
-  followers Follow[]      @relation("Followed")
-  following Follow[]      @relation("Follower")
+  listFriends Friends[] @relation("Owner")
+  posts       Post[]
+  // comments  Comment[]
+  // followers Follow[]      @relation("Followed")
+  // following Follow[]      @relation("Follower")
 }
 
-model Friendships {
-  id             Int      @id @default(autoincrement())
-  usuarioEnvia   User     @relation("UsuarioEnvia", fields: [usuarioId1], references: [id])
-  usuarioId1     String
-  usuarioRecibe  User     @relation("UsuarioRecibe", fields: [usuarioId2], references: [id])
-  usuarioId2     String
-  estado         Estado   @relation(fields: [estadoId], references: [id])
-  estadoId       Int
-  fechaSolicitud DateTime @default(now())
+model Friends {
+  id       String @id @default(cuid())
+  ownerId  String
+  friendId String
+  owner    User   @relation("Owner", fields: [ownerId], references: [id])
+  createdAt DateTime @default(now())
 
-  @@unique([usuarioId1, usuarioId2])
+  @@unique([ownerId, friendId])
 }
 
 model Post {
-  id        String    @id @default(cuid())
-  userId    String    @map("id_user")
+  id        String   @id @default(cuid())
+  userId    String   @map("id_user")
   postText  String?
   postImage String?
-  createdAt DateTime  @default(now()) @map("created_at")
-  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
-  comments  Comment[]
+  createdAt DateTime @default(now()) @map("created_at")
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  // comments  Comment[]
 
   @@map("post")
 }
 
-model Comment {
-  id        Int      @id @default(autoincrement())
-  postId    String   @map("id_post")
-  userId    String   @map("id_user")
-  content   String?
-  createdAt DateTime @default(now()) @map("created_at")
+// model Comment {
+//   id        Int      @id @default(autoincrement())
+//   postId    String   @map("id_post")
+//   userId    String   @map("id_user")
+//   content   String?
+//   createdAt DateTime @default(now()) @map("created_at")
 
-  // Relations
-  post Post @relation(fields: [postId], references: [id], onDelete: Cascade)
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+//   // Relations
+//   post Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+//   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  @@map("comments")
-}
+//   @@map("comments")
+// }
 
+// model Follow {
+//   id         Int    @id @default(autoincrement())
+//   follower   User   @relation("Follower", fields: [followerId], references: [id])
+//   followerId String
+//   followed   User   @relation("Followed", fields: [followedId], references: [id])
+//   followedId String
+
+//   @@unique([followerId, followedId])
+// }
 model Account {
   id                String  @id @default(cuid())
   userId            String  @map("user_id")
@@ -104,16 +109,6 @@ model Account {
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
-}
-
-model Follow {
-  id         Int    @id @default(autoincrement())
-  follower   User   @relation("Follower", fields: [followerId], references: [id])
-  followerId String
-  followed   User   @relation("Followed", fields: [followedId], references: [id])
-  followedId String
-
-  @@unique([followerId, followedId])
 }
 
 model VerificationToken {

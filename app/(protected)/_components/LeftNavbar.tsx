@@ -27,7 +27,7 @@ export default function LeftNavbar() {
                     <h1 className={cn("text-4xl font-semibold", lugrasimo.className)}>
                         <strong>View<span className='text-red-600'>Soul</span></strong></h1>
                     <div className="flex content-center justify-center text-center">
-                        <UserButton />
+                        {/* <UserButton /> */}
                         <p className="text-small-bold">{user?.name}</p>
                     </div>
                 </div>
