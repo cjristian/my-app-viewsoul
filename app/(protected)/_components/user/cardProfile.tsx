@@ -11,7 +11,6 @@ import { PostProfileProps, ProfileUser } from "@/interfaces/user";
 
 
 export default function CardProfile({ id }: PostProfileProps) {
-
     const [userFeatures, setUser] = useState<ProfileUser[]>([]);
     useEffect(() => {
         async function fetchUser() {

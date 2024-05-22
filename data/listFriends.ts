@@ -17,7 +17,6 @@ export const getListFriendIds = async (userId: string) => {
             throw new Error("Usuario no encontrado");
         }
 
-        // Extraer solo los IDs de los amigos
         const friendIds = user.listFriends.map(friendship => friendship.friendId);
 
         return friendIds;

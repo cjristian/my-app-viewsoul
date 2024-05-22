@@ -4,6 +4,10 @@ import { useState, useEffect } from "react";
 import { useCurrentUser } from "@/hooks/use-current-user";
 import MiniCardProfile from "../_components/user/miniCardProfile";
 import { getListFriendIds } from "@/data/listFriends";
+import Link from 'next/link'
+import TableFriends from "../_components/user/tableFriends";
+
+
 
 export default function ServerPage() {
     const user = useCurrentUser();
@@ -45,7 +49,7 @@ export default function ServerPage() {
     return (
         <div>
             {friends.map((id) => (
-                <MiniCardProfile key={id} id={id} />
+                <TableFriends key={id} id={id} />
             ))}
         </div>
     );

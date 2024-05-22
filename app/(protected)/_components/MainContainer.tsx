@@ -21,7 +21,7 @@ export default function ManinContainer({ children }: { children: React.ReactNode
                     <h1 className="text-2xl">{title}</h1>
                 </div>
 
-                <div className="mt-5 flex w-full justify-center">
+                <div className="">
                     {children}
                 </div>
             </div>

@@ -62,7 +62,6 @@ export function CreateForm() {
             setError("Debe proporcionar al menos una imagen o un texto para crear una publicación");
             return;
         }
-        console.log(values)
         startTransition(() => {
             createPost(values)
                 .then((data) => {
@@ -97,8 +96,8 @@ export function CreateForm() {
                                     if (result.event === 'success') {
                                         widget.close()
                                         //@ts-ignore
-                                        setImageUrl(result.info?.secure_url); 
-                                        
+                                        setImageUrl(result.info?.secure_url);
+
                                     }
                                 }}
                                 uploadPreset="gcghsfi6"

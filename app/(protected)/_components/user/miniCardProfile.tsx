@@ -19,7 +19,7 @@ export default function MiniCardProfile({ id }: PostProfileProps) {
     }, [id]);
 
     return (
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center space-x-4 rounded ">
             {userFeatures.map((value) => (
                 <div key={value.id} className="flex items-center">
                     <img
