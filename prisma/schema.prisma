@@ -28,6 +28,7 @@ model User {
   id                    String                 @id @default(cuid())
   name                  String?
   lastname              String?
+  nickname              String?                @unique
   birthdate             String?
   country               String?
   gender                Gender?
@@ -48,10 +49,10 @@ model User {
 }
 
 model Friends {
-  id       String @id @default(cuid())
-  ownerId  String
-  friendId String
-  owner    User   @relation("Owner", fields: [ownerId], references: [id])
+  id        String   @id @default(cuid())
+  ownerId   String
+  friendId  String
+  owner     User     @relation("Owner", fields: [ownerId], references: [id])
   createdAt DateTime @default(now())
 
   @@unique([ownerId, friendId])

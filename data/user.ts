@@ -20,3 +20,12 @@ export const getUserById = async (id: string | undefined) => {
     }
 }
 
+export const getUserByNickname = async (nickname: string | undefined) => {
+    try {
+        const user = await db.user.findUnique({ where: { nickname } });
+        return user;
+    } catch {
+        return null;
+    }
+}
+

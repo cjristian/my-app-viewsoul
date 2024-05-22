@@ -42,6 +42,9 @@ export function CreateForm() {
     const [success, setSuccess] = useState<string | undefined>("");
     const [isPending, startTransition] = useTransition();
 
+    const [isLoading, setIsLoading] = useState(false);
+
+
     const form = useForm<z.infer<typeof CreateFormSchema>>({
         resolver: zodResolver(CreateFormSchema),
         defaultValues: {
@@ -58,8 +61,12 @@ export function CreateForm() {
     const onSubmit = async (values: z.infer<typeof CreateFormSchema>) => {
         setError("");
         setSuccess("");
+        setIsLoading(true);
+
         if (values.photo === "" && values.text === "") {
             setError("Debe proporcionar al menos una imagen o un texto para crear una publicación");
+            setIsLoading(false);
+
             return;
         }
         startTransition(() => {
@@ -176,8 +183,9 @@ export function CreateForm() {
                 <Button
                     type="submit"
                     className="w-full"
+                    disabled={isLoading}
                 >
-                    Subir Post
+                    {isLoading ? 'Cargando...' : 'Subir Post'}
                 </Button>
             </form>
         </Form>

@@ -58,6 +58,8 @@ export const { handlers: { GET, POST }, auth, signIn, signOut
                 session.user.name = token.name;
                 session.user.email = token.email as string;
                 session.user.isOAuth = token.isOAuth as boolean;
+                session.user.lastName = token.lastName
+                session.user.image = token.image
             }
 
 
@@ -79,6 +81,8 @@ export const { handlers: { GET, POST }, auth, signIn, signOut
             token.email = existingUser.email;
             token.role = existingUser.role;
             token.isTwoFactorEnabled = existingUser.isTwoFactorEnabled;
+            token.lastName = existingUser.lastname
+            token.image = existingUser.image
 
             return token;
         }
