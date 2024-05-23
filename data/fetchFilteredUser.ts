@@ -9,6 +9,13 @@ export const fetchFilteredUser = async (query: string, currentPage: number, excl
     const offset = (currentPage - 1) * ITEMS_PER_PAGE;
 
     try {
+        const friends = await db.friends.findMany({
+            where: { ownerId: excludedUserId },
+            select: { friendId: true }
+        });
+
+        const friendIds = friends.map(friend => friend.friendId);
+
         const users = await db.user.findMany({
             where: {
                 AND: [
@@ -18,7 +25,8 @@ export const fetchFilteredUser = async (query: string, currentPage: number, excl
                             { lastname: { contains: query, mode: 'insensitive' } }
                         ]
                     },
-                    { id: { not: excludedUserId } }
+                    { id: { not: excludedUserId } },
+                    { id: { notIn: friendIds } }
                 ]
             },
             orderBy: { id: 'asc' },

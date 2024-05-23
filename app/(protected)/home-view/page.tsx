@@ -1,5 +1,6 @@
 import Search from '@/app/(protected)/_components/search';
 import Table from '../_components/table';
+import PostFriends from '../_components/user/postFriends';
 
 
 export default async function HomePage({
@@ -15,11 +16,14 @@ export default async function HomePage({
 
 
     return (
-        <div className="w-full">
-            <div className="mt-4 flex items-center justify-between gap-2 md:mt-8">
-                <Search placeholder="Buscar personas con nombre o apellido" />
+        <div className="flex justify-center w-full">
+            <div className="w-full max-w-4xl p-4">
+                <div className="mt-4 flex items-center justify-between gap-2 md:mt-8">
+                    <Search placeholder="Buscar personas con nombre o apellido" />
+                </div>
+                <Table query={query} currentPage={currentPage} />
+                <PostFriends />
             </div>
-            <Table query={query} currentPage={currentPage} />
         </div>
     );
 }

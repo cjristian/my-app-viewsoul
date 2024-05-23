@@ -1,9 +1,8 @@
 "use client";
-import { useState, useEffect, Suspense } from "react";
+import { useState, useEffect } from "react";
 import { useCurrentUser } from "@/hooks/use-current-user";
 import { getListFriendIds } from "@/data/listFriends";
 import TableFriends from "../_components/user/tableFriends";
-import Skeleton from "../_components/skeleton"; // Importa el componente Skeleton
 
 import {
     Table,
@@ -13,7 +12,7 @@ import {
     TableRow,
 } from "@/components/ui/table";
 
-export default function ServerPage() {
+export default function FriendsPage() {
     const user = useCurrentUser();
     const [friends, setFriends] = useState<string[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
@@ -42,55 +41,29 @@ export default function ServerPage() {
         fetchFriends();
     }, [user]);
 
-    if (loading) {
-        // Muestra el indicador de carga mientras se cargan los datos
-        return (
-            <Suspense fallback={<Skeleton />}>
-                <Table>
+    return (
+        <>
+            {friends.length === 0 ? (
+                <p className="text-white">No tienes amigos :(</p>
+            ) : (
+                <Table className="bg-transparent text-white ">
                     <TableHeader>
                         <TableRow>
                             <TableHead>Imagen</TableHead>
                             <TableHead>Nombre</TableHead>
-                            <TableHead>Apellido</TableHead>
-                            <TableHead>País</TableHead>
+                            <TableHead className="hidden text-white md:table-cell">Apellido</TableHead>
+                            <TableHead className="hidden md:table-cell">País</TableHead>
                             <TableHead>Cumpleaños</TableHead>
+                            <TableHead></TableHead>
                         </TableRow>
                     </TableHeader>
                     <TableBody>
-                        {/* Renderiza el Skeleton para cada fila de la tabla */}
-                        <TableRow>
-                            <Skeleton />
-                            <Skeleton />
-                            <Skeleton />
-                            <Skeleton />
-                            <Skeleton />
-                        </TableRow>
+                        {friends.map((id) => (
+                            <TableFriends key={id} id={id} />
+                        ))}
                     </TableBody>
                 </Table>
-            </Suspense>
-        );
-    }
-
-    if (error) {
-        return <div>{error}</div>;
-    }
-
-    return (
-        <Table>
-            <TableHeader>
-                <TableRow>
-                    <TableHead>Imagen</TableHead>
-                    <TableHead>Nombre</TableHead>
-                    <TableHead>Apellido</TableHead>
-                    <TableHead>País</TableHead>
-                    <TableHead>Cumpleaños</TableHead>
-                </TableRow>
-            </TableHeader>
-            <TableBody>
-                {friends.map((id) => (
-                    <TableFriends key={id} id={id} />
-                ))}
-            </TableBody>
-        </Table>
+            )}
+        </>
     );
 }

@@ -7,7 +7,6 @@ import { User } from '@/interfaces/user';
 import { useCurrentUser } from '@/hooks/use-current-user';
 import { fetchFilteredUser } from '@/data/fetchFilteredUser';
 import { createFieldsFriend } from '@/data/addFriends';
-import CryptoJS from 'crypto-js';
 
 
 export default function UserTable({
@@ -36,7 +35,7 @@ export default function UserTable({
             ...prev,
             [userId]: !prev[userId]
         }));
-    
+
         try {
             if (idUser?.id) {
                 const response = await createFieldsFriend(idUser.id, userId);
@@ -60,24 +59,24 @@ export default function UserTable({
             }));
         }
     };
-    
+
 
 
     return (
         <div className="mt-6">
             {users?.map((user) => (
                 <div key={user.id} className="flex items-center border-b border-gray-200 py-2">
-                    <img src={user.image ? user.image : ""} className="w-10 h-10 rounded-full mr-4" />
+                    <img src={user.image ? user.image : "https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y&s=200"} className="w-10 h-10 rounded-full mr-4" />
                     <div>
                         <Link href={`/profile/${user.id}`} >
-                            <h3 className="font-semibold">{user.name} {user.lastname}</h3>
+                            <h3 className="font-semibold text-white">{user.name} {user.lastname}</h3>
                         </Link>
                         <p className="text-sm text-gray-500">{user.country}</p>
                     </div>
                     <button
                         onClick={() => handleFollow(user.id)}
-                        className={`ml-auto px-4 py-2 rounded ${following[user.id] ? 'bg-gray-500 text-white' : 'bg-blue-500 text-white'
-                            } hover:${following[user.id] ? 'bg-gray-600' : 'bg-blue-600'} focus:outline-none`}
+                        className={`ml-auto px-4 py-2 rounded ${following[user.id] ? 'bg-gray-500 text-white' : 'bg-red-500 text-white'
+                            } hover:${following[user.id] ? 'bg-gray-600' : 'bg-red-700'} focus:outline-none`}
                     >
                         {following[user.id] ? 'Siguiendo' : 'Seguir'}
                     </button>
