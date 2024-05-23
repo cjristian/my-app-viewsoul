@@ -2,9 +2,7 @@
 import * as z from "zod";
 import { db } from "@/lib/db";
 
-
 import { CreateFormSchema } from "@/schemas";
-import { revalidatePath } from "next/cache";
 
 export const createPost = async (data: z.infer<typeof CreateFormSchema>) => {
 
@@ -46,9 +44,9 @@ export const createPost = async (data: z.infer<typeof CreateFormSchema>) => {
             });
         }
 
-        revalidatePath('/profile')
         return { success: "Publicación creada correctamente" };
     } catch (error) {
         return { error: "Error al crear la publicación" };
     }
 };
+

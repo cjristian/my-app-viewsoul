@@ -67,7 +67,7 @@ export default function UserTable({
         <div className="mt-6">
             {users?.map((user) => (
                 <div key={user.id} className="flex items-center border-b border-gray-200 py-2">
-                    <img src={user.image ? user.image : ""} className="w-10 h-10 rounded-full mr-4" />
+                    <img src={user.image ? user.image : "https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y&s=200"} className="w-10 h-10 rounded-full mr-4" />
                     <div>
                         <Link href={`/profile/${user.id}`} >
                             <h3 className="font-semibold">{user.name} {user.lastname}</h3>

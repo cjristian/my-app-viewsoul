@@ -25,27 +25,31 @@ export default function PostProfile({ id }: PostProfileProps) {
     }, [id]);
 
     return (
-        <div className="w-full mt-4 h-full">
-            <h2 className="text-xl font-semibold mb-4"> Publicaciones</h2>
-            {userPosts.map((post) => (
-                <div key={post.id} className="bg-white p-4 rounded-lg shadow-md mb-4">
-                    <MiniCardProfile id={id} />
+        <div className="w-full mt-4 h-full text-white bg-transparent">
+        <h2 className="text-xl font-semibold mb-4">Publicaciones</h2>
+        {userPosts.map((post) => (
+            <div key={post.id} className=" rounded-lg shadow-md mb-4 border border-white">
+                <MiniCardProfile id={id} />
+                <div className="flex flex-col border-t-2">
                     <p className="text-lg">{post.postText}</p>
                     {post.postImage && (
-                        <Image
-                            src={getImagePath(post.postImage)}
-                            alt="Post Image"
-                            width={300}
-                            height={200}
-                            priority={true}
-                            className="mt-2 max-w-full h-auto"
-                        />
+                        <div className="flex justify-center mt-2 ">
+                            <Image
+                                src={getImagePath(post.postImage)}
+                                alt="Post Image"
+                                width={500}
+                                height={500}
+                                priority={true}
+                                className="rounded"
+                            />
+                        </div>
                     )}
-                    <p className="text-gray-500 text-sm mt-2">
-                        Publicado el: {new Date(post.createdAt).toLocaleString()}
-                    </p>
                 </div>
-            ))}
-        </div>
-    );
+                <p className="text-gray-300 text-sm mt-2">
+                    Publicado el: {new Date(post.createdAt).toLocaleString()}
+                </p>
+            </div>
+        ))}
+    </div>
+);
 }

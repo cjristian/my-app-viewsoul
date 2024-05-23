@@ -31,10 +31,10 @@ export default function CardProfile({ id }: PostProfileProps) {
                 {userFeatures.map((value) => (
                     <Image
                         key={value.id}
-                        src={value.image ? value.image : "https://via.placeholder.com/150"}
+                        src={value.image ? value.image : "https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y&s=200"}
                         alt="Foto de perfil"
-                        width={150}
-                        height={150}
+                        width={120}
+                        height={120}
                         className="w-42 h-42 md:w-60 md:h-50 rounded-full border-4 border-white shadow-md"
                     />
                 ))}

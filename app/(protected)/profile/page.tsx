@@ -18,8 +18,8 @@ export default function ProfilePage() {
     }
 
     return (
-        <div className="flex flex-col items-center justify-center w-full">
-            <div className="bg-gray-100 p-4 rounded-lg shadow-md flex flex-col md:flex-col items-center w-full h-full">
+        <div className="flex flex-col items-center justify-center w-full text-white  rounded-lg">
+            <div className="bg-transparent p-4 rounded-lg  flex flex-col md:flex-col items-center w-full h-full">
                 <Suspense fallback="Cargando ...">
                     <CardProfile id={user?.id} />
                     <PostProfile id={user?.id} />

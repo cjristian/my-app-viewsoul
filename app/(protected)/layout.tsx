@@ -7,7 +7,7 @@ interface ProtectedLayaoutProps {
 }
 export default function ProtectedLayaout({ children }: ProtectedLayaoutProps) {
     return (
-        <div className="flex h-screen flex-col md:flex-row md:overflow-hidden">
+        <div className="flex h-screen flex-col md:flex-row md:overflow-hidden bg-black">
             <div className="w-full flex-none md:w-64 ">
                 <LeftNavbar />
             </div>

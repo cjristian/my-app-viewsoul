@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import Image from 'next/image';
+
 import { profileUser } from "@/data/profileUser";
 import { PostProfileProps, ProfileUser } from "@/interfaces/user";
 
@@ -22,14 +24,18 @@ export default function MiniCardProfile({ id }: PostProfileProps) {
         <div className="flex items-center space-x-4 rounded ">
             {userFeatures.map((value) => (
                 <div key={value.id} className="flex items-center">
-                    <img
-                        src={value.image ? value.image : "https://via.placeholder.com/150"}
+                    <Image
+                        src={value.image ? value.image : "https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y&s=200"}
                         alt="Foto de perfil"
-                        className="w-16 h-16 md:w-20 md:h-20 rounded-full border-4 border-white shadow-md m-2"
+                        width={50}
+                        height={50}
+                        objectFit="cover"
+                        className="rounded-full border-4 border-white shadow-md my-2"
                     />
-                    <div className="flex flex-col items-start">
+                    <div className="flex flex-col items-start ml-4">
                         <strong className="text-lg">{value.name} {value.lastname}</strong>
                     </div>
+                   
                 </div>
             ))}
         </div>

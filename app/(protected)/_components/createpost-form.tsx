@@ -115,10 +115,10 @@ export function CreateForm() {
                             >
                                 {({ open }) => (
                                     <FormItem>
-                                        <FormLabel className="text-slate-800">Post Imagen  </FormLabel>
-                                        <div className="relative cursor-pointer hover:opacity-70 transition p-10
+                                        <FormLabel className="text-white text-base">Subir Imagen  </FormLabel>
+                                        <div className="relative cursor-pointer rounded hover:bg-gradient-to-r from-black to-red-900 transition p-10
                                     border-neutral-300 flex flex-col justify-center items-center gap-4
-                                    text-neutral-600 bg-slate-100"
+                                    text-white bg-transparent"
                                             onClick={() => open()}
                                         >
                                             <TbPhotoPlus
@@ -157,17 +157,17 @@ export function CreateForm() {
                         name="text"
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel>
+                                <FormLabel className="text-white text-base">
                                     Escribe tus post
                                 </FormLabel>
                                 <FormControl>
                                     <div className="relative">
-                                        <PencilSquareIcon className="pointer-events-none absolute left-3 top-3 h-[18px] w-[18px] text-gray-500 peer-focus:text-gray-900" />
+                                        <PencilSquareIcon className="pointer-events-none absolute left-3 top-3 h-[18px] w-[18px] text-white peer-focus:text-white" />
                                         <Textarea
                                             {...field}
                                             disabled={isPending}
                                             placeholder="What's on your mind?"
-                                            className="pl-8 resize-none"
+                                            className="pl-8 resize-none bg-gradient-to-r text-white from-black to-red-950"
 
                                         />
                                     </div>
@@ -182,8 +182,9 @@ export function CreateForm() {
                 <FormSuccess message={success} />
                 <Button
                     type="submit"
-                    className="w-full"
+                    size={"lg"}
                     disabled={isLoading}
+                    className="m-auto bg-red-900 hover:bg-red-800 "
                 >
                     {isLoading ? 'Cargando...' : 'Subir Post'}
                 </Button>
