@@ -26,6 +26,10 @@ export default function PostProfile({ id }: PostProfileProps) {
 
     return (
         <div className="w-full mt-4 h-full text-white bg-transparent">
+<<<<<<< HEAD
+=======
+        <h2 className="text-xl font-semibold mb-4">Publicaciones</h2>
+>>>>>>> 0ca575fabacd1e313d22ada8c2d28a8345a6f0b9
         {userPosts.map((post) => (
             <div key={post.id} className=" rounded-lg shadow-md mb-4 border border-white">
                 <MiniCardProfile id={id} />

@@ -42,6 +42,7 @@ export default function FriendsPage() {
     }, [user]);
 
     return (
+<<<<<<< HEAD
         <>
             {friends.length === 0 ? (
                 <p className="text-white">No tienes amigos :(</p>
@@ -65,5 +66,24 @@ export default function FriendsPage() {
                 </Table>
             )}
         </>
+=======
+        <Table className="bg-transparent text-white ">
+            <TableHeader>
+                <TableRow >
+                    <TableHead >Imagen</TableHead>
+                    <TableHead >Nombre</TableHead>
+                    <TableHead className="hidden  text-white  md:table-cell">Apellido</TableHead>
+                    <TableHead className="hidden md:table-cell">País</TableHead>
+                    <TableHead >Cumpleaños</TableHead>
+                    <TableHead></TableHead>
+                </TableRow>
+            </TableHeader>
+            <TableBody>
+                {friends.map((id) => (
+                    <TableFriends key={id} id={id} />
+                ))}
+            </TableBody>
+        </Table>
+>>>>>>> 0ca575fabacd1e313d22ada8c2d28a8345a6f0b9
     );
 }
