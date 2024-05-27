@@ -1,5 +1,5 @@
 import NextAuth from "next-auth";
-import { Gender, UserRole } from "@prisma/client";
+import { UserRole } from "@prisma/client";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 
 import { db } from "@/lib/db";
@@ -9,7 +9,7 @@ import { getTwoFactorConfirmationByUserId } from "@/data/two-factor-confirmation
 import { getAccountByUserId } from "./data/account";
 
 
-export const { handlers: { GET, POST }, auth, signIn, signOut
+export const { handlers: { GET, POST }, auth, signIn, signOut,unstable_update
 } = NextAuth({
     pages: {
         signIn: "/auth/login",
@@ -43,6 +43,7 @@ export const { handlers: { GET, POST }, auth, signIn, signOut
             return true;
         },
         async session({ token, session }) {
+            console.log('Entro en Session')
             if (token.sub && session.user) {
                 session.user.id = token.sub;
             }
@@ -55,11 +56,15 @@ export const { handlers: { GET, POST }, auth, signIn, signOut
             }
 
             if (session.user) {
+               console.log('Seteo user')
+
                 session.user.name = token.name;
                 session.user.email = token.email as string;
                 session.user.isOAuth = token.isOAuth as boolean;
                 session.user.lastName = token.lastName
                 session.user.image = token.image
+
+                console.log({session})
             }
 
 

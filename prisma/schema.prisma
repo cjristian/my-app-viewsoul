@@ -19,11 +19,6 @@ enum Gender {
   OTRO
 }
 
-// model Estado {
-//   id          Int           @id @default(autoincrement())
-//   Friendships Friendships[]
-// }
-
 model User {
   id                    String                 @id @default(cuid())
   name                  String?
@@ -32,9 +27,9 @@ model User {
   birthdate             String?
   country               String?
   gender                Gender?
+  image                 String?
   email                 String?                @unique
   emailVerified         DateTime?              @map("email_verified")
-  image                 String?
   password              String?
   role                  UserRole               @default(USER)
   accounts              Account[]
@@ -43,9 +38,6 @@ model User {
 
   listFriends Friends[] @relation("Owner")
   posts       Post[]
-  // comments  Comment[]
-  // followers Follow[]      @relation("Followed")
-  // following Follow[]      @relation("Follower")
 }
 
 model Friends {
@@ -65,34 +57,10 @@ model Post {
   postImage String?
   createdAt DateTime @default(now()) @map("created_at")
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  // comments  Comment[]
 
   @@map("post")
 }
 
-// model Comment {
-//   id        Int      @id @default(autoincrement())
-//   postId    String   @map("id_post")
-//   userId    String   @map("id_user")
-//   content   String?
-//   createdAt DateTime @default(now()) @map("created_at")
-
-//   // Relations
-//   post Post @relation(fields: [postId], references: [id], onDelete: Cascade)
-//   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-//   @@map("comments")
-// }
-
-// model Follow {
-//   id         Int    @id @default(autoincrement())
-//   follower   User   @relation("Follower", fields: [followerId], references: [id])
-//   followerId String
-//   followed   User   @relation("Followed", fields: [followedId], references: [id])
-//   followedId String
-
-//   @@unique([followerId, followedId])
-// }
 model Account {
   id                String  @id @default(cuid())
   userId            String  @map("user_id")

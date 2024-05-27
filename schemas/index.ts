@@ -81,11 +81,17 @@ export const RegisterSchema = z.object({
     }),
     name: z.string().min(1, {
         message: "¿Cuál es tu nombre?"
-    })
+    }),
+    lastname: z.string().min(1, {
+        message: "¿Cuáles son tus?"
+    }),
+    birthday: z.string().min(1, {
+        message: "¿Cuáles es tu fecha de nacimiinto?"
+    }),
 });
 
 export const CreateFormSchema = z.object({
-    userId: z.string(), 
+    userId: z.string(),
     photo: z.string().optional(),
     text: z.string().optional(),
 }).refine((data) => {

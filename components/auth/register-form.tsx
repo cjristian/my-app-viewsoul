@@ -30,6 +30,9 @@ export function RegisterForm() {
             email: "",
             password: "",
             name: "",
+            lastname: "",
+            birthday: "",
+
         }
     })
     const onSubmit = (values: z.infer<typeof RegisterSchema>) => {
@@ -114,6 +117,43 @@ export function RegisterForm() {
                                 </FormItem>
                             )}
                         />
+                        <FormField
+                            control={form.control}
+                            name="lastname"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel>Apellido</FormLabel>
+                                    <FormControl>
+                                        <Input
+                                            {...field}
+                                            disabled={isPending}
+                                            placeholder="Cuenca "
+                                            type="text"
+                                        />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={form.control}
+                            name="birthday"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel>Fecha de nacimiento</FormLabel>
+                                    <FormControl>
+                                        <Input
+                                            {...field}
+                                            disabled={isPending}
+                                            placeholder="Cuenca "
+                                            type="date"
+                                        />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+
                     </div>
                     <FormError message={error} />
                     <FormSuccess message={success} />

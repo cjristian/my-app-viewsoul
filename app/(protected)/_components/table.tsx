@@ -35,7 +35,7 @@ export default function UserTable({
             ...prev,
             [userId]: !prev[userId]
         }));
-
+    
         try {
             if (idUser?.id) {
                 const response = await createFieldsFriend(idUser.id, userId);
@@ -47,6 +47,7 @@ export default function UserTable({
                     }));
                 } else {
                     console.log(`Se ha añadido al usuario con ID: ${userId} a la lista de amigos`);
+                    setUsers((prevUsers) => prevUsers.filter((user) => user.id !== userId));
                 }
             } else {
                 console.error("Error: User ID is undefined");

@@ -11,6 +11,7 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table";
+import { createFieldsFriend } from "@/data/addFriends";
 
 export default function FriendsPage() {
     const user = useCurrentUser();
@@ -40,12 +41,10 @@ export default function FriendsPage() {
 
         fetchFriends();
     }, [user]);
-
     return (
-
         <>
             {friends.length === 0 ? (
-                <p className="text-white">No tienes amigos :(</p>
+                <p className="text-white">No tienes amigos </p>
             ) : (
                 <Table className="bg-transparent text-white ">
                     <TableHeader>
@@ -66,6 +65,6 @@ export default function FriendsPage() {
                 </Table>
             )}
         </>
-
     );
 }
+

@@ -1,37 +1,12 @@
 "use client";
-import { useState, useEffect } from "react";
-import { useCurrentUser } from "@/hooks/use-current-user";
-import { getListFriendIds } from "@/data/listFriends";
+
 import PostProfile from "./postProfile";
+import { useFriends } from "@/app/(protected)/hooks/useFriends";
 
-export default function PostFriends() {
-  const user = useCurrentUser();
-  const [friends, setFriends] = useState<string[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
+export default  function PostFriends() {
 
-  useEffect(() => {
-    const fetchFriends = async () => {
-      try {
-        if (user?.id) {
-          const friendIds = await getListFriendIds(user.id);
-          if (Array.isArray(friendIds)) {
-            setFriends(friendIds);
-          } else if (friendIds.error) {
-            setError(friendIds.error);
-          }
-        } else {
-          setError("ID de usuario no encontrado");
-        }
-      } catch (error) {
-        setError("Error al obtener los IDs de amigos");
-      } finally {
-        setLoading(false);
-      }
-    };
+  const { friends, loading, error } = useFriends()
 
-    fetchFriends();
-  }, [user]);
 
   return (
     <div className="space-y-4">
