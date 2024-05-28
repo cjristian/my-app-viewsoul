@@ -18,7 +18,8 @@ bun install
 ```
 Luego, ejecuta el servidor de desarrollo:
 
-bash
+
+``` bash
 Copy code
 npm run dev
 # o
@@ -27,6 +28,8 @@ yarn dev
 pnpm dev
 # o
 bun dev
+```
+
 Abre [http://localhost:3000](http://localhost:3000) en tu navegador para ver el resultado.
 
 Puedes comenzar a editar la página modificando `app/page.tsx`. La página se actualiza automáticamente a medida que editas el archivo.
