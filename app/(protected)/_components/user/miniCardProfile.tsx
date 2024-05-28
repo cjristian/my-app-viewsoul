@@ -30,7 +30,7 @@ export default function MiniCardProfile({ id }: PostProfileProps) {
                         width={50}
                         height={50}
                         objectFit="cover"
-                        className="rounded-full border-4 border-white shadow-md my-2"
+                        className="rounded-full  border-4 border-white shadow-md my-2"
                     />
                     <div className="flex flex-col items-start ml-4">
                         <strong className="text-lg">{value.name} {value.lastname}</strong>

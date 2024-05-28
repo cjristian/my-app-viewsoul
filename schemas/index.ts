@@ -74,7 +74,7 @@ export const LoginSchema = z.object({
 
 export const RegisterSchema = z.object({
     email: z.string().email({
-        message: "Introduce un correo electrónico válido"
+        message: "Correo electrónico inválido"
     }),
     password: z.string().min(6, {
         message: "Combinación de al menos seis números y letras"
@@ -83,11 +83,18 @@ export const RegisterSchema = z.object({
         message: "¿Cuál es tu nombre?"
     }),
     lastname: z.string().min(1, {
-        message: "¿Cuáles son tus?"
+        message: "¿Cuáles son tus apellidos?"
     }),
-    birthday: z.string().min(1, {
-        message: "¿Cuáles es tu fecha de nacimiinto?"
+    birthdate: z.string().min(1, {
+        message: "¿Cuál es tu fecha de nacimiento?"
     }),
+    country: z.string().min(2, {
+        message: "¿De donde eres?"
+    }),
+    gender: z.enum(["MASCULINO", "FEMENINO", "OTRO"], {
+        message: "Selecciona un género válido"
+    }),
+    image: z.string().optional(),
 });
 
 export const CreateFormSchema = z.object({

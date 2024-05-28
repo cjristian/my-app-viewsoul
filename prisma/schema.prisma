@@ -23,7 +23,6 @@ model User {
   id                    String                 @id @default(cuid())
   name                  String?
   lastname              String?
-  nickname              String?                @unique
   birthdate             String?
   country               String?
   gender                Gender?

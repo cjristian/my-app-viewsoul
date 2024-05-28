@@ -30,7 +30,7 @@ export default function PostProfile({ id }: PostProfileProps) {
                 <div key={post.id} className=" rounded-lg shadow-md mb-4 border border-white">
                     <MiniCardProfile id={id} />
                     <div className="flex flex-col border-t-2">
-                        <p className="text-lg">{post.postText}</p>
+                        <p className="text-lg text-white">{post.postText}</p>
                         {post.postImage && (
                             <div className="flex justify-center mt-2 ">
                                 <Image

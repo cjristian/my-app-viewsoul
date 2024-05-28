@@ -1,10 +1,14 @@
 'use client';
 
 import * as z from "zod"
-import { useState, useTransition } from "react";
+import { useEffect, useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { RegisterSchema } from "@/schemas";
+import { CldUploadWidget } from "next-cloudinary";
+import Image from 'next/image'
+
+import { countries } from "@/lib/definitions";
 import { Input } from "@/components/ui/input";
 import {
     Form,
@@ -14,6 +18,17 @@ import {
     FormLabel,
     FormMessage
 } from "@/components/ui/form";
+
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from "@/components/ui/select"
+import { TbPhotoPlus } from "react-icons/tb"
+
+
 import { CardWrapper } from "@/components/auth/card-wrapper";
 import { Button } from "@/components/ui/button";
 import { FormError } from "../form-error";
@@ -21,6 +36,7 @@ import { FormSuccess } from "../form-success";
 import { register } from "@/actions/register";
 
 export function RegisterForm() {
+    const [imageUrl, setImageUrl] = useState('')
     const [error, setError] = useState<string | undefined>("");
     const [success, setSuccess] = useState<string | undefined>("");
     const [isPending, startTransition] = useTransition();
@@ -31,10 +47,16 @@ export function RegisterForm() {
             password: "",
             name: "",
             lastname: "",
-            birthday: "",
-
+            birthdate: "",
+            country: "",
+            gender: undefined,
+            image: ""
         }
     })
+    useEffect(() => {
+        form.setValue('image', imageUrl);
+    }, [imageUrl, form]);
+
     const onSubmit = (values: z.infer<typeof RegisterSchema>) => {
         setError("")
         setSuccess("")
@@ -55,14 +77,14 @@ export function RegisterForm() {
             headerLabel=""
             backButtonLabel="Ya tengo una cuenta"
             backButtonHref="/auth/login"
-
+            className="max-w-full max-h-[1000px] md:max-w-2xl lg:max-w-4xl mx-auto p-4"
         >
             <Form {...form}>
                 <form
                     onSubmit={form.handleSubmit(onSubmit)}
                     className="space-y-6"
                 >
-                    <div className="space-y-4">
+                    <div className="grid grid-cols-2 md:grid-cols-2 gap-4">
                         <FormField
                             control={form.control}
                             name="name"
@@ -127,7 +149,7 @@ export function RegisterForm() {
                                         <Input
                                             {...field}
                                             disabled={isPending}
-                                            placeholder="Cuenca "
+                                            placeholder="Jimenez Cuenca"
                                             type="text"
                                         />
                                     </FormControl>
@@ -137,7 +159,7 @@ export function RegisterForm() {
                         />
                         <FormField
                             control={form.control}
-                            name="birthday"
+                            name="birthdate"
                             render={({ field }) => (
                                 <FormItem>
                                     <FormLabel>Fecha de nacimiento</FormLabel>
@@ -145,12 +167,108 @@ export function RegisterForm() {
                                         <Input
                                             {...field}
                                             disabled={isPending}
-                                            placeholder="Cuenca "
+                                            placeholder="Cuenca"
                                             type="date"
                                         />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={form.control}
+                            name="country"
+                            render={({ field }) => (
+                                < FormItem >
+                                    <FormLabel>Pais</FormLabel>
+                                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                        <FormControl>
+                                            <SelectTrigger>
+                                                <SelectValue placeholder="Seleciona un pais" />
+                                            </SelectTrigger>
+                                        </FormControl>
+                                        <SelectContent>
+                                            {countries.map((countries) => (
+                                                <SelectItem key={countries.id} value={countries.name}>{countries.name}</SelectItem>
+                                            ))}
+
+                                        </SelectContent>
+                                    </Select>
+                                    <FormMessage />
+                                </FormItem>
+
+                            )}
+                        />
+                        <FormField
+                            control={form.control}
+                            name="gender"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel>Sexo</FormLabel>
+                                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                        <FormControl>
+                                            <SelectTrigger>
+                                                <SelectValue placeholder="Seleciona tu sexo" />
+                                            </SelectTrigger>
+                                        </FormControl>
+                                        <SelectContent>
+                                            <SelectItem value="MASCULINO">Masculino</SelectItem>
+                                            <SelectItem value="FEMENINO">Femenino</SelectItem>
+                                            <SelectItem value="OTRO">Otro</SelectItem>
+                                        </SelectContent>
+                                    </Select>
+                                    <FormMessage />
+
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={form.control}
+                            name="image"
+                            render={({ field }) => (
+                                <CldUploadWidget
+                                    onSuccess={(result, { widget }) => {
+                                        if (result.event === 'success') {
+                                            widget.close();
+                                            //@ts-ignore
+                                            setImageUrl(result.info?.secure_url);
+                                        }
+                                    }}
+                                    uploadPreset="gcghsfi6"
+                                    options={{ maxFiles: 1 }}
+                                >
+                                    {({ open }) => (
+                                        <FormItem>
+                                            <FormLabel>Foto de perfil</FormLabel>
+                                            <div
+                                                className="relative flex flex-col items-center justify-center h-40 w-40 border-2 border-dashed border-gray-300 rounded-full cursor-pointer"
+                                                onClick={() => open()}
+                                            >
+                                                <TbPhotoPlus size={50} />
+                                                {imageUrl && (
+                                                    <div className="absolute inset-0 w-full h-full">
+                                                        <Image
+                                                            src={imageUrl}
+                                                            alt="Foto de perfil"
+                                                            layout="fill"
+                                                            objectFit="cover"
+                                                            className="rounded-full"
+                                                        />
+                                                    </div>
+                                                )}
+                                            </div>
+                                            <FormControl>
+                                                <Input
+                                                    {...field}
+                                                    disabled={isPending}
+                                                    type="hidden"
+                                                    name="image"
+                                                    value={imageUrl}
+                                                />
+                                            </FormControl>
+                                        </FormItem>
+                                    )}
+                                </CldUploadWidget>
                             )}
                         />
 
