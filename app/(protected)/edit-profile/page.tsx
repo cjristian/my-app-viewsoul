@@ -54,7 +54,7 @@ export default function EditProfile() {
             newPassword: undefined,
             name: user?.name || undefined,
             email: user?.email || undefined,
-            role: user?.role || undefined,
+            // role: user?.role || undefined,
             isTwoFactorEnabled: user?.isTwoFactorEnabled || undefined,
         }
     });
@@ -77,9 +77,8 @@ export default function EditProfile() {
     }
 
     return (
-        <Card className="w-[600px]">
+        <Card className="w-[600px] text-white bg-transparent">
             <CardHeader>
-                <p className="text-2xl font-semibold text-center">Settings</p>
             </CardHeader>
             <CardContent>
                 <Form {...form}>
@@ -98,6 +97,7 @@ export default function EditProfile() {
                                             <Input
                                                 {...field}
                                                 placeholder="John Doe"
+                                                className="text-black"
                                                 disabled={isPending}
                                             />
                                         </FormControl>
@@ -119,6 +119,8 @@ export default function EditProfile() {
                                                         placeholder="jhon.doe@example.com"
                                                         disabled={isPending}
                                                         type="email"
+                                                        className="text-black"
+
                                                     />
                                                 </FormControl>
                                                 <FormMessage />
@@ -136,6 +138,7 @@ export default function EditProfile() {
                                                         {...field}
                                                         placeholder="XXXXXX"
                                                         disabled={isPending}
+                                                        className="text-black"
                                                         type="password"
                                                     />
                                                 </FormControl>
@@ -155,6 +158,8 @@ export default function EditProfile() {
                                                         placeholder="XXXXXX"
                                                         disabled={isPending}
                                                         type="password"
+                                                        className="text-black"
+
                                                     />
                                                 </FormControl>
                                                 <FormMessage />
@@ -172,7 +177,7 @@ export default function EditProfile() {
                                     justify-between rounded-lg p-3 shadow-sm">
                                             <div className="space-y-0.5">
                                                 <FormLabel>Two Factor Authentication</FormLabel>
-                                                <FormDescription>Enable two factor authentication for your account</FormDescription>
+                                                <FormDescription className="text-gray-400">Autentificar a través del email</FormDescription>
                                             </div>
                                             <FormControl>
                                                 <Switch
@@ -187,7 +192,7 @@ export default function EditProfile() {
                                     )}
                                 />
                             )}
-                            <FormField
+                            {/* <FormField
                                 control={form.control}
                                 name="role"
                                 render={({ field }) => (
@@ -215,13 +220,16 @@ export default function EditProfile() {
                                         <FormMessage />
                                     </FormItem>
                                 )}
-                            />
+                            /> */}
                         </div>
                         <FormError message={error} />
                         <FormSuccess message={success} />
                         <Button
                             disabled={isPending}
-                            type="submit">
+                            type="submit"
+                            className="bg-red-600 hover:bg-red-800"
+                        >
+
                             Guardar
                         </Button>
                     </form>
@@ -230,7 +238,7 @@ export default function EditProfile() {
 
             </CardContent>
         </Card >
-       
+
     )
 }
 

@@ -4,7 +4,7 @@ import * as z from "zod";
 export const SettingsSchema = z.object({
     name: z.optional(z.string()),
     isTwoFactorEnabled: z.optional(z.boolean()),
-    role: z.enum([UserRole.ADMIN, UserRole.USER]),
+    // role: z.enum([UserRole.ADMIN, UserRole.USER]),
     email: z.optional(z.string().email()),
     password: z.optional(z.string().min(6)),
     newPassword: z.optional(z.string().min(6)),
@@ -84,6 +84,9 @@ export const RegisterSchema = z.object({
     }),
     lastname: z.string().min(1, {
         message: "¿Cuáles son tus apellidos?"
+    }),
+    nickname: z.string().min(3, {
+        message: "Escribe el nombre de usuaio"
     }),
     birthdate: z.string().min(1, {
         message: "¿Cuál es tu fecha de nacimiento?"

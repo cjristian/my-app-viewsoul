@@ -50,7 +50,8 @@ export function RegisterForm() {
             birthdate: "",
             country: "",
             gender: undefined,
-            image: ""
+            image: "",
+            nickname: ""
         }
     })
     useEffect(() => {
@@ -77,14 +78,14 @@ export function RegisterForm() {
             headerLabel=""
             backButtonLabel="Ya tengo una cuenta"
             backButtonHref="/auth/login"
-            className="max-w-full max-h-[1000px] md:max-w-2xl lg:max-w-4xl mx-auto p-4"
+            className="max-w-full md:max-w-2xl lg:max-w-4xl mx-auto p-4"
         >
             <Form {...form}>
                 <form
                     onSubmit={form.handleSubmit(onSubmit)}
                     className="space-y-6"
                 >
-                    <div className="grid grid-cols-2 md:grid-cols-2 gap-4">
+                    <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                         <FormField
                             control={form.control}
                             name="name"
@@ -222,6 +223,25 @@ export function RegisterForm() {
                                 </FormItem>
                             )}
                         />
+                        <FormField
+                            control={form.control}
+                            name="nickname"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel>Nombre de usuario</FormLabel>
+                                    <FormControl>
+                                        <Input
+                                            {...field}
+                                            disabled={isPending}
+                                            placeholder="cjristian_23"
+                                            type="text"
+                                        />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+
                         <FormField
                             control={form.control}
                             name="image"
