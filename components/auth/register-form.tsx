@@ -85,7 +85,7 @@ export function RegisterForm() {
                     onSubmit={form.handleSubmit(onSubmit)}
                     className="space-y-6"
                 >
-                    <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4 items-center justify-center">
                         <FormField
                             control={form.control}
                             name="name"
@@ -200,6 +200,7 @@ export function RegisterForm() {
 
                             )}
                         />
+                        
                         <FormField
                             control={form.control}
                             name="gender"
