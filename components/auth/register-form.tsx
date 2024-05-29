@@ -163,7 +163,9 @@ export function RegisterForm() {
                             name="birthdate"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel>Fecha de nacimiento</FormLabel>
+                                    <FormLabel className="md:block hidden">Fecha de nacimiento</FormLabel>
+                                    <FormLabel className="md:hidden">F.<span>nacimiento</span></FormLabel>
+
                                     <FormControl>
                                         <Input
                                             {...field}
@@ -200,7 +202,7 @@ export function RegisterForm() {
 
                             )}
                         />
-                        
+
                         <FormField
                             control={form.control}
                             name="gender"
@@ -229,7 +231,9 @@ export function RegisterForm() {
                             name="nickname"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel>Nombre de usuario</FormLabel>
+                                    <FormLabel className="md:block hidden">Nombre de usuario</FormLabel>
+                                    <FormLabel className="md:hidden">Nickname</FormLabel>
+
                                     <FormControl>
                                         <Input
                                             {...field}
