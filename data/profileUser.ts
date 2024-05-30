@@ -16,6 +16,7 @@ export const profileUser = async (id: string) => {
                 lastname: true,
                 birthdate: true,
                 country: true,
+                nickname: true,
                 gender: true,
                 image: true,
             },

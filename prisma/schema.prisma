@@ -44,7 +44,7 @@ model Friends {
   id        String   @id @default(cuid())
   ownerId   String
   friendId  String
-  owner     User     @relation("Owner", fields: [ownerId], references: [id])
+  owner     User     @relation("Owner", fields: [ownerId], references: [id], onDelete: Cascade)
   createdAt DateTime @default(now())
 
   @@unique([ownerId, friendId])

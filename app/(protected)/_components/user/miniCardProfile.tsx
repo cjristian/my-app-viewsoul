@@ -3,7 +3,14 @@ import Image from 'next/image';
 
 import { profileUser } from "@/data/profileUser";
 import { PostProfileProps, ProfileUser } from "@/interfaces/user";
-
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuLabel,
+    DropdownMenuSeparator,
+    DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
 
 export default function MiniCardProfile({ id }: PostProfileProps) {
 
@@ -21,23 +28,28 @@ export default function MiniCardProfile({ id }: PostProfileProps) {
     }, [id]);
 
     return (
-        <div className="flex items-center space-x-4 rounded ">
+        <>
             {userFeatures.map((value) => (
-                <div key={value.id} className="flex items-center">
-                    <Image
-                        src={value.image ? value.image : "https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y&s=200"}
-                        alt="Foto de perfil"
-                        width={50}
-                        height={50}
-                        objectFit="cover"
-                        className="rounded-full  border-4 border-white shadow-md my-2"
-                    />
-                    <div className="flex flex-col items-start ml-4">
-                        <strong className="text-lg">{value.name} {value.lastname}</strong>
+                <div className="flex items-center justify-between space-x-4 w-full" key={value.id}>
+                    <div>
+                        <span>{value.name}</span>
+                        {/* <span>{value.nickname}</span> */}
                     </div>
-                   
+
+                    <DropdownMenu>
+                        <DropdownMenuTrigger>Open</DropdownMenuTrigger>
+                        <DropdownMenuContent>
+                            <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                            <DropdownMenuSeparator />
+                            <DropdownMenuItem>Profile</DropdownMenuItem>
+                            <DropdownMenuItem>Billing</DropdownMenuItem>
+                            <DropdownMenuItem>Team</DropdownMenuItem>
+                            <DropdownMenuItem>Subscription</DropdownMenuItem>
+                        </DropdownMenuContent>
+                    </DropdownMenu>
+
                 </div>
             ))}
-        </div>
+        </>
     );
 }

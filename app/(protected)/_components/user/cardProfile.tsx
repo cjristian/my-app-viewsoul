@@ -29,14 +29,17 @@ export default function CardProfile({ id }: PostProfileProps) {
 
             <div className="mb-4 md:mb-0 mr-10">
                 {userFeatures.map((value) => (
-                    <Image
-                        key={value.id}
-                        src={value.image ? value.image : "https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y&s=200"}
-                        alt="Foto de perfil"
-                        width={120}
-                        height={120}
-                        className="w-42 h-42 md:w-60 md:h-50 rounded-full border-4 border-white shadow-md"
-                    />
+                    <div className="rounded-full w-32 h-32" key={value.id}>
+
+                        <Image
+                            key={value.id}
+                            src={value.image ? value.image : "https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y&s=200"}
+                            alt="Foto de perfil"
+                            width={120}
+                            height={120}
+                            className="object-cover w-full h-full rounded-full border-2 border-white shadow-md"
+                        />
+                    </div>
                 ))}
             </div>
 

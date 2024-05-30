@@ -12,20 +12,16 @@ export default async function ProtectedLayaout({ children }: ProtectedLayaoutPro
 
     return (
         <SessionProvider session={session}>
-
-        <div className="flex h-screen flex-col md:flex-row md:overflow-hidden bg-black">
-
-            <div className="w-full flex-none md:w-64 border-r-2">
-                <LeftNavbar />
+            <div className="w-full h-full flex justify-center items-center relative bg-black">
+                <div className="max-w-screen-xl w-full h-full flex relative">
+                    <LeftNavbar />
+                    <div className="flex-1 flex ">
+                        <MainContainer>
+                            {children}
+                        </MainContainer>
+                    </div>
+                </div>
             </div>
-            <MainContainer>
-                {children}
-            </MainContainer>
-            {/* <div className="w-full flex-none md:w-64 "> */}
-            {/* <RightNavbar /> */}
-            {/* </div> */}
-
-        </div>
         </SessionProvider>
     )
 }
