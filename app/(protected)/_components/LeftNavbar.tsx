@@ -52,7 +52,7 @@ export default function LeftNavbar() {
                         onClick={onClick}
                     >
                         <ExitIcon height="32px" width="32px" className="w-6 text-white text-base" />
-                        <div className="hidden md:block text-white">Cerrear Sesión</div>
+                        <div className="hidden md:block text-white">Cerrar Sesión</div>
                     </button>
                 </div>
             </div>

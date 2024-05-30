@@ -9,7 +9,7 @@ import { getTwoFactorConfirmationByUserId } from "@/data/two-factor-confirmation
 import { getAccountByUserId } from "./data/account";
 
 
-export const { handlers: { GET, POST }, auth, signIn, signOut,unstable_update
+export const { handlers: { GET, POST }, auth, signIn, signOut, unstable_update
 } = NextAuth({
     pages: {
         signIn: "/auth/login",
@@ -56,15 +56,15 @@ export const { handlers: { GET, POST }, auth, signIn, signOut,unstable_update
             }
 
             if (session.user) {
-               console.log('Seteo user')
+                console.log('Seteo user')
 
                 session.user.name = token.name;
                 session.user.email = token.email as string;
                 session.user.isOAuth = token.isOAuth as boolean;
                 session.user.lastName = token.lastName
                 session.user.image = token.image
-
-                console.log({session})
+                session.user.nickname = token.nickname
+                console.log({ session })
             }
 
 
@@ -88,6 +88,7 @@ export const { handlers: { GET, POST }, auth, signIn, signOut,unstable_update
             token.isTwoFactorEnabled = existingUser.isTwoFactorEnabled;
             token.lastName = existingUser.lastname
             token.image = existingUser.image
+            token.nickname = existingUser.nickname
 
             return token;
         }

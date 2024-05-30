@@ -8,6 +8,7 @@ type User = {
     gender: string | null;
     emailVerified: Date | null;
     image: string | null;
+    nickname: string | null;
 }
 
 export type ExtendedUser = DefaultSession["user"] & {
