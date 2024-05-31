@@ -43,7 +43,6 @@ export const { handlers: { GET, POST }, auth, signIn, signOut, unstable_update
             return true;
         },
         async session({ token, session }) {
-            console.log('Entro en Session')
             if (token.sub && session.user) {
                 session.user.id = token.sub;
             }
@@ -56,7 +55,6 @@ export const { handlers: { GET, POST }, auth, signIn, signOut, unstable_update
             }
 
             if (session.user) {
-                console.log('Seteo user')
 
                 session.user.name = token.name;
                 session.user.email = token.email as string;
