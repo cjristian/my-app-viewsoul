@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import Image from 'next/image';
 import { profileUser } from "@/data/profileUser";
 import { useFriends } from "../../hooks/useFriends";
-import { SkeletonCardListFriends } from "../Skeletons";
+import { SkeletonCardListFriends } from "../skeletons";
 
 async function fetchFriendProfiles(friends: string[]): Promise<ProfileUser[]> {
     try {

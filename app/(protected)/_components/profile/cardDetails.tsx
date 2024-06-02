@@ -5,7 +5,7 @@ import { CiCalendar, CiLocationArrow1 } from "react-icons/ci";
 import { formatDate } from "@/app/(protected)/_functions/formData";
 import useProfileUser from "../../hooks/useProfileUser";
 import { PostProfileProps } from "@/interfaces/user";
-import { SkeletonCardDetails } from "../Skeletons";
+import { SkeletonCardDetails } from "../skeletons";
 
 export default function CardDetails({ id }: PostProfileProps) {
     const { userFeatures, loading } = useProfileUser(id);

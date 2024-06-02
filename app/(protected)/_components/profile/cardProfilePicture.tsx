@@ -2,7 +2,7 @@ import React from 'react';
 import { PostProfileProps } from "@/interfaces/user";
 import useProfileUser from "../../hooks/useProfileUser";
 import Image from 'next/image';
-import { SkeletonCardProfilePicture } from '../Skeletons';
+import { SkeletonCardProfilePicture } from '../skeletons';
 
 export default function CardProfilePicture({ id }: PostProfileProps) {
     const usuario = useProfileUser(id);
