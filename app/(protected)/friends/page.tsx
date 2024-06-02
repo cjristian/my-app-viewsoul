@@ -1,7 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
-import { useCurrentUser } from "@/hooks/use-current-user";
-import { getListFriendIds } from "@/data/listFriends";
+
 import TableFriends from "../_components/user/tableFriends";
 
 import {
@@ -11,40 +9,18 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table";
-import { createFieldsFriend } from "@/data/addFriends";
+import { useFriends } from "../hooks/useFriends";
 
 export default function FriendsPage() {
-    const user = useCurrentUser();
-    const [friends, setFriends] = useState<string[]>([]);
-    const [loading, setLoading] = useState<boolean>(true);
-    const [error, setError] = useState<string | null>(null);
-
-    useEffect(() => {
-        const fetchFriends = async () => {
-            try {
-                if (user?.id) {
-                    const friendIds = await getListFriendIds(user.id);
-                    if (Array.isArray(friendIds)) {
-                        setFriends(friendIds);
-                    } else if (friendIds.error) {
-                        setError(friendIds.error);
-                    }
-                } else {
-                    setError("User ID not found");
-                }
-            } catch (error) {
-                setError("Error fetching friend IDs");
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        fetchFriends();
-    }, [user]);
+    const { friends, loading, error } = useFriends();
     return (
         <>
-            {friends.length === 0 ? (
-                <p className="text-white">No tienes amigos </p>
+            {loading ? (
+                <p>Loading...</p>
+            ) : error ? (
+                <p>Error: {error}</p>
+            ) : friends.length === 0 ? (
+                <p>No tienes amigos</p>
             ) : (
                 <Table className="bg-transparent text-white ">
                     <TableHeader>
@@ -65,6 +41,6 @@ export default function FriendsPage() {
                 </Table>
             )}
         </>
-    );
+    )
 }
 

@@ -62,7 +62,7 @@ export const { handlers: { GET, POST }, auth, signIn, signOut, unstable_update
                 session.user.lastName = token.lastName
                 session.user.image = token.image
                 session.user.nickname = token.nickname
-                console.log({ session })
+                session.user.emailVerified = token.emailVerified
             }
 
 
@@ -87,6 +87,7 @@ export const { handlers: { GET, POST }, auth, signIn, signOut, unstable_update
             token.lastName = existingUser.lastname
             token.image = existingUser.image
             token.nickname = existingUser.nickname
+            token.emailVerified = existingUser.emailVerified
 
             return token;
         }

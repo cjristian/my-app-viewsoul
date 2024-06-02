@@ -5,8 +5,6 @@ import Link from "next/link";
 import { profileUser } from "@/data/profileUser";
 import { PostProfileProps, ProfileUser } from "@/interfaces/user";
 import { useCurrentUser } from "@/hooks/use-current-user";
-import { useRouter } from 'next/router';
-
 import {
     TableCell,
     TableRow,
@@ -17,7 +15,6 @@ import {
     AlertDialogAction,
     AlertDialogCancel,
     AlertDialogContent,
-    AlertDialogDescription,
     AlertDialogFooter,
     AlertDialogHeader,
     AlertDialogTitle,

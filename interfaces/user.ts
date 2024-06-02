@@ -31,6 +31,8 @@ export interface ProfileUser {
     country: string | null,
     gender: string | null,
     image: string | null,
+    nickname: string | null,
+    emailVerified: Date | null,
 
 }
 export interface PostProfileProps {

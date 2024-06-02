@@ -18,6 +18,8 @@ export const profileUser = async (id: string) => {
                 country: true,
                 gender: true,
                 image: true,
+                nickname: true,
+                emailVerified: true,
             },
         });
         return posts;

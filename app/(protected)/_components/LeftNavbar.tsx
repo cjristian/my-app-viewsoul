@@ -45,38 +45,35 @@ export default function LeftNavbar() {
                     transition duration-200 w-full justify-between "
                 >
                     <div className="flex items-center  space-x-2 text-white">
-                        <h1 className={cn("text-xl  text-white font-semibold mr-6", lugrasimo.className)}>
-                            <strong>V<span className='text-red-600'>S</span></strong></h1>
+                        <h1 className={cn("text-2xl  text-white font-semibold mr-6", lugrasimo.className)}>
+                            <strong>V<span className='text-red-600'>Soul</span></strong></h1>
 
-                        <Link className="rounded-full w-12 h-12"
-                            href={"/profile"}>
-                            <Image
+                        <DropdownMenu>
+                            <DropdownMenuTrigger className="rounded-full w-12 h-12"><Image
                                 src={user?.image ? user?.image : "https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y&s=200"}
                                 alt="Foto de perfil"
                                 width={120}
                                 height={120}
                                 className="object-cover w-full h-full rounded-full border-2 border-white shadow-md"
-                            />
-                        </Link>
+                            /></DropdownMenuTrigger>
+                            <DropdownMenuContent>
+                                <DropdownMenuLabel>Mi perfil</DropdownMenuLabel>
+                                <DropdownMenuSeparator />
+                                <DropdownMenuItem>
+                                    <Link href={"/edit-profile"}>
+                                        Editar perfil
+                                    </Link>
+                                </DropdownMenuItem>
+                                <DropdownMenuItem onClick={() => onClick()}>Cerrar Sesión</DropdownMenuItem>
+                            </DropdownMenuContent>
+                        </DropdownMenu>
                         <div className="text-left text-sm">
                             <div className="font-semibold">{user?.name}</div>
                             <div className="">@{user?.nickname}</div>
                         </div>
                     </div>
 
-                    <DropdownMenu>
-                        <DropdownMenuTrigger><BsThreeDots className="text-white" /></DropdownMenuTrigger>
-                        <DropdownMenuContent>
-                            <DropdownMenuLabel>Mi perfil</DropdownMenuLabel>
-                            <DropdownMenuSeparator />
-                            <DropdownMenuItem>
-                                <Link href={"/edit-profile"}>
-                                    Editar perfil
-                                </Link>
-                            </DropdownMenuItem>
-                            <DropdownMenuItem onClick={() => onClick()}>Cerrar Sesión</DropdownMenuItem>
-                        </DropdownMenuContent>
-                    </DropdownMenu>
+
                 </div>
             </div>
 
