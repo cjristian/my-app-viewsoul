@@ -54,7 +54,7 @@ export default function TableFriends({ id }: PostProfileProps) {
     return (
         <>
             {userFeatures.map(user => (
-                <TableRow key={user.id} className="hover:bg-red-900 rounded" >
+                <TableRow key={user.id} className="hover:bg-red-900 rounded bg-transparent " >
                     <TableCell>
                         <Image
                             src={user.image ? user.image : "https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y&s=200"}
@@ -73,9 +73,12 @@ export default function TableFriends({ id }: PostProfileProps) {
 
                         </Link>
                     </TableCell>
-                    <TableCell className="hidden md:table-cell">{user.lastname}</TableCell>
-                    <TableCell className="hidden md:table-cell">{user.country}</TableCell>
-                    <TableCell >{user.birthdate}</TableCell>
+                    <TableCell className="hidden md:table-cell">{user.lastname?user.lastname:"Apellido  no disponible"}</TableCell>
+
+                    <TableCell className="hidden md:table-cell">{user.country?user.country:"País no disponible"}</TableCell>
+
+                    <TableCell >{user.birthdate?user.birthdate: "Fecha de nacimiento no disponible"}</TableCell>
+
                     <TableCell>
                         <AlertDialog>
                             <AlertDialogTrigger><TrashIcon className="w-5 hover:bg-red-600 rounded-lg" /></AlertDialogTrigger>

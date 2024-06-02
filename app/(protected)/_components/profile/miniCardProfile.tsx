@@ -24,7 +24,7 @@ export default function MiniCardProfile({ id }: PostProfileProps) {
         <div className="flex items-center space-x-4 rounded ">
             {userFeatures.map((value) => (
                 <div key={value.id} className="flex items-center">
-                    <div className="rounded-full w-16 h-16">
+                    <div className="rounded-full w-12 h-10 md:w-16 md:h-16">
                         <Image
                             src={value.image ? value.image : "https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y&s=200"}
                             alt="Foto de perfil"
@@ -34,8 +34,13 @@ export default function MiniCardProfile({ id }: PostProfileProps) {
                         />
                     </div>
 
-                    <div className="flex flex-col items-start ml-4">
-                        <strong className="text-lg">{value.name} {value.lastname}</strong>
+                    <div className="flex flex-col items-start ml-2 md:ml-4">
+                        <strong className="text-sm md:text-lg ">{value.name}
+                         <span className=" hidden md:block">
+                            {value.lastname}
+                        </span>
+                        </strong>
+                        <strong className="text-xs md:text-sm text-white/35">@{value.nickname?value.nickname:"Nickname no disponible"}</strong>
                     </div>
 
                 </div>

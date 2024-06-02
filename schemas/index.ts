@@ -110,3 +110,9 @@ export const CreateFormSchema = z.object({
     message: "Debes proporcionar al menos una foto o un texto",
 });
 
+export const UpdateFormSchema = z.object({
+    postId: z.string().nonempty("El ID de la publicación es obligatorio"),
+    userId: z.string().nonempty("El ID del usuario es obligatorio"),
+    photo: z.string().optional(),
+    text: z.string().optional()
+});

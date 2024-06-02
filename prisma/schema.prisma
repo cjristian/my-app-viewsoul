@@ -28,6 +28,7 @@ model User {
   gender                Gender?
   image                 String?
   nickname              String?                @unique
+  imageTitle            String?
   email                 String?                @unique
   emailVerified         DateTime?              @map("email_verified")
   password              String?

@@ -63,6 +63,8 @@ export const { handlers: { GET, POST }, auth, signIn, signOut, unstable_update
                 session.user.image = token.image
                 session.user.nickname = token.nickname
                 session.user.emailVerified = token.emailVerified
+                session.user.imageTitle = token.imageTitle
+
             }
 
 
@@ -88,6 +90,8 @@ export const { handlers: { GET, POST }, auth, signIn, signOut, unstable_update
             token.image = existingUser.image
             token.nickname = existingUser.nickname
             token.emailVerified = existingUser.emailVerified
+            token.imageTitle = existingUser.imageTitle
+
 
             return token;
         }

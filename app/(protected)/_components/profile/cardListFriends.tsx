@@ -50,8 +50,8 @@ export default function CardListFriends() {
                                 className="object-cover w-10 h-10 rounded-full mr-2"
                             />
                             <div>
-                                <p className="text-lg">{friend.name} {friend.lastname}</p>
-                                <p className="text-sm text-white/70">@{friend.nickname ? friend.nickname : "No nickname"}</p>
+                                <p className="text-base md:text-lg">{friend.name} {friend.lastname}</p>
+                                <p className="text-xs md:text-sm text-white/70">@{friend.nickname ? friend.nickname : "No nickname"}</p>
                             </div>
                         </div>
                     </li>

@@ -20,6 +20,7 @@ export const profileUser = async (id: string) => {
                 image: true,
                 nickname: true,
                 emailVerified: true,
+                imageTitle: true,
             },
         });
         return posts;

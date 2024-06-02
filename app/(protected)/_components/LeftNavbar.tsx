@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 
-import { ExitIcon } from "@radix-ui/react-icons";
 import { cn } from "@/lib/utils";
 import { lugrasimo } from "@/components/fonts/lugrasimo";
 import { useCurrentUser } from "@/hooks/use-current-user";

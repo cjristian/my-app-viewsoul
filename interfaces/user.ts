@@ -33,6 +33,7 @@ export interface ProfileUser {
     image: string | null,
     nickname: string | null,
     emailVerified: Date | null,
+    imageTitle: string | null
 
 }
 export interface PostProfileProps {

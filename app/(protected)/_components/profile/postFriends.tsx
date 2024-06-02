@@ -18,7 +18,7 @@ export default  function PostFriends() {
       {friends.length > 0 && (
         <>
           {friends.map((id) => (
-            <PostProfile key={id} id={id} />
+            <PostProfile key={id} id={id}  />
           ))}
         </>
       )}

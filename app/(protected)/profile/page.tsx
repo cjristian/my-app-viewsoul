@@ -3,7 +3,6 @@
 import { useCurrentUser } from "@/hooks/use-current-user";
 import CardProfile from "@/app/(protected)/_components/profile/principalCardProfile";
 import PostProfile from "@/app/(protected)/_components/profile/postProfile";
-import { Suspense } from "react";
 
 export default function ProfilePage() {
     const user = useCurrentUser();
@@ -20,10 +19,8 @@ export default function ProfilePage() {
     return (
         <div className="flex flex-col items-center justify-center w-full h-full text-white p-5">
             <div className="bg-transparent rounded-full flex flex-col  items-center w-full max-w-7xl ">
-                <Suspense fallback="Cargando ...">
                     <CardProfile id={user?.id} />
-                    <PostProfile id={user?.id} />
-                </Suspense>
+                    <PostProfile id={user?.id} showOptions />
             </div>
         </div>
     );
