@@ -1,8 +1,8 @@
 "use client";
 
 import { Suspense } from "react";
-import CardProfile from "../../_components/user/cardProfile";
-import PostProfile from "../../_components/user/postProfile";
+import CardProfile from "../../_components/profile/principalCardProfile";
+import PostProfile from "../../_components/profile/postProfile";
 
 export default function ProfilePage({ params }: { params: { id: string } }) {
     const id = params.id;

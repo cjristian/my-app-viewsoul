@@ -1,8 +1,9 @@
 import { ProfileUser } from "@/interfaces/user";
 import { useEffect, useState } from "react";
 import Image from 'next/image';
-import { useFriends } from "../../hooks/useFriends";
 import { profileUser } from "@/data/profileUser";
+import { useFriends } from "../../hooks/useFriends";
+import { SkeletonCardListFriends } from "../Skeletons";
 
 async function fetchFriendProfiles(friends: string[]): Promise<ProfileUser[]> {
     try {
@@ -18,14 +19,20 @@ export default function CardListFriends() {
     const listFriends = useFriends();
     const { friends } = listFriends;
     const [friendProfiles, setFriendProfiles] = useState<ProfileUser[]>([]);
+    const [loading, setLoading] = useState(true); 
 
     useEffect(() => {
         async function fetchProfiles() {
             const profiles = await fetchFriendProfiles(friends);
             setFriendProfiles(profiles);
+            setLoading(false); 
         }
         fetchProfiles();
     }, [friends]);
+
+    if (loading) {
+        return <SkeletonCardListFriends />; 
+    }
 
     return (
         <div className="w-full h-full  bg-transparent md:flex md:flex-col md:items-start md:w-1/2 md:h-[244px] md:bg-red-950 p-4 md:mt-0 mt-2 md:ml-2 rounded-sm overflow-y-scroll">

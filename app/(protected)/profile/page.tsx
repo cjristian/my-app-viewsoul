@@ -1,8 +1,8 @@
 "use client";
 
 import { useCurrentUser } from "@/hooks/use-current-user";
-import CardProfile from "@/app/(protected)/_components/user/cardProfile";
-import PostProfile from "@/app/(protected)/_components/user/postProfile";
+import CardProfile from "@/app/(protected)/_components/profile/principalCardProfile";
+import PostProfile from "@/app/(protected)/_components/profile/postProfile";
 import { Suspense } from "react";
 
 export default function ProfilePage() {

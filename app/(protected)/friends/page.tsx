@@ -1,6 +1,6 @@
 "use client";
 
-import TableFriends from "../_components/user/tableFriends";
+import TableFriends from "../_components/profile/tableFriends";
 
 import {
     Table,

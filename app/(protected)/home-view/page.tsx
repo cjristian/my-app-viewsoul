@@ -1,6 +1,6 @@
 import Search from '@/app/(protected)/_components/search';
 import Table from '../_components/table';
-import PostFriends from '../_components/user/postFriends';
+import PostFriends from '../_components/profile/postFriends';
 
 
 export default async function HomePage({
