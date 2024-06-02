@@ -1,0 +1,55 @@
+import { ProfileUser } from "@/interfaces/user";
+import { useEffect, useState } from "react";
+import Image from 'next/image';
+import { useFriends } from "../../hooks/useFriends";
+import { profileUser } from "@/data/profileUser";
+
+async function fetchFriendProfiles(friends: string[]): Promise<ProfileUser[]> {
+    try {
+        const profiles = await Promise.all(friends.map(friendId => profileUser(friendId)));
+        return profiles.flat();
+    } catch (error) {
+        console.error("Error fetching friend profiles:", error);
+        return [];
+    }
+}
+
+export default function CardListFriends() {
+    const listFriends = useFriends();
+    const { friends } = listFriends;
+    const [friendProfiles, setFriendProfiles] = useState<ProfileUser[]>([]);
+
+    useEffect(() => {
+        async function fetchProfiles() {
+            const profiles = await fetchFriendProfiles(friends);
+            setFriendProfiles(profiles);
+        }
+        fetchProfiles();
+    }, [friends]);
+
+    return (
+        <div className="w-full h-full  bg-transparent md:flex md:flex-col md:items-start md:w-1/2 md:h-[244px] md:bg-red-950 p-4 md:mt-0 mt-2 md:ml-2 rounded-sm overflow-y-scroll">
+            <h2 className="text-xl font-bold mb-4">Friends</h2>
+            <hr className=" w-full h-1 border-none bg-gradient-to-r from-white to-red-950" />
+            <ul>
+                {friendProfiles.map((friend) => (
+                    <li key={friend.id} className="mb-2">
+                        <div className="flex items-center">
+                            <Image
+                                src={friend.image ? friend.image : "https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y&s=200"}
+                                alt="Friend profile picture"
+                                width={40}
+                                height={40}
+                                className="object-cover w-10 h-10 rounded-full mr-2"
+                            />
+                            <div>
+                                <p className="text-lg">{friend.name} {friend.lastname}</p>
+                                <p className="text-sm text-white/70">@{friend.nickname ? friend.nickname : "No nickname"}</p>
+                            </div>
+                        </div>
+                    </li>
+                ))}
+            </ul>
+        </div>
+    );
+}

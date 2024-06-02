@@ -1,24 +1,24 @@
 "use client";
 
 import Image from 'next/image';
+import { GenderIcon } from '../../_functions/genderIncons';
 import { formatDate } from "@/app/(protected)/_functions/formData";
 import { capitalizeFirstLetter } from "@/app/(protected)/_functions/upperLetter";
 import { PostProfileProps } from "@/interfaces/user";
-import { useFriends } from "../../hooks/useFriends";
 import useProfileUser from "../../hooks/useProfileUser";
-import { FriendProfile } from '../friends/FriendsProfile';
+import { LiaBirthdayCakeSolid } from "react-icons/lia";
+import { CiLocationArrow1, CiCalendar } from "react-icons/ci";
+import CardListFriends from './CardListFriends';
+import { Suspense } from 'react';
+import SkeletonCardListFriends from '../skeleton/SkeletonCardListFriends';
 
 
 export default function CardProfile({ id }: PostProfileProps) {
     const usuario = useProfileUser(id);
     const { userFeatures } = usuario;
-    const listFriends = useFriends();
-    const { friends } = listFriends;
-    console.log(friends);
-    // const friendProfiles = friends.map((friendId) => {
-    //     const { userFeatures } = useProfileUser(friendId);
-    //     return userFeatures.length > 0 ? userFeatures[0] : null;
-    // });
+
+
+
     return (
         <div className="flex flex-col items-center w-full h-full relative">
             <div className="absolute top-0 left-0 w-full h-40 rounded-sm bg-gray-300"></div>
@@ -36,30 +36,44 @@ export default function CardProfile({ id }: PostProfileProps) {
                             />
                         </div>
                         <h1 className="text-3xl font-bold">{value.name} {value.lastname}</h1>
-                        <h1 className="text-1xl text-white/35">@{value.nickname}</h1>
+                        <h1 className="text-1xl text-white/35">@{value.nickname ? value.nickname : "No nickname"}</h1>
                     </div>
                 ))}
             </div>
 
-            <div className="flex flex-row items-start w-full h-full p-4 mt-4">
-                <div className="flex flex-col items-start w-1/2 h-full bg-slate-400 p-4 mr-2 rounded">
+            <div className="flex flex-col md:flex md:flex-row md:items-start md:w-full md:h-full md:p-4 md:mt-4">
+                <div className="w-full h-full md:flex md:flex-col md:items-start md:justify-center md:w-1/2 md:h-[244px] bg-gradient-to-r from-black to-red-950 p-4 md:mr-2 rounded ">
+                    <h2 className="text-xl font-bold mb-4">Detalles</h2>
+                    <hr className=" w-full h-1 border-none bg-gradient-to-r from-white to-red-950" />
+
                     {userFeatures.map((value) => (
                         <div key={value.id}>
-                            <p className="text-lg mb-2"><strong>Género:</strong> {capitalizeFirstLetter(value.gender)}</p>
-                            <p className="text-lg mb-2"><strong>Fecha de Nacimiento:</strong> {value.birthdate ? formatDate(value.birthdate) : "No hay fecha disponible"}</p>
-                            <p className="text-lg mb-2"><strong>País:</strong> {value.country}</p>
-                            <p className="text-lg mb-2"><strong>Con viewSoul desde:</strong> {value.emailVerified ? new Date(value.emailVerified).toLocaleDateString() : ""}</p>
+                            <div className="text-lg mb-2">
+                                <GenderIcon gender={value.gender ?? ''} />
+                                {capitalizeFirstLetter(value.gender ?? '')}
+                            </div>
+                            <div className="text-lg mb-2">
+                                <LiaBirthdayCakeSolid className="inline-block mr-2" />
+                                Nació el {value.birthdate ? formatDate(value.birthdate) : "No hay fecha disponible"}
+                            </div>
+                            <div className="text-lg mb-2">
+                                <CiLocationArrow1 className="inline-block mr-2" />
+                                Vive en {value.country ? value.country : "No hay país disponible"}
+                            </div>
+                            <div className="text-lg mb-2">
+                                <CiCalendar className="inline-block mr-2" />
+                                <span className='hidden md:inline-block '>Se unió a ViewSoul</span>
+                                <span className='md:hidden'>En ViewSoul --- </span>
+                                -{value.emailVerified ? new Date(value.emailVerified).toLocaleDateString() : "No hay fecha disponible"}
+                            </div>
                         </div>
                     ))}
+                    <hr className=" w-full h-1 border-none bg-gradient-to-r from-white to-red-950" />
+
                 </div>
-                {/* <div className="flex flex-col items-start w-1/2 h-full bg-slate-400 p-4 ml-2 rounded-sm overflow-y-scroll">
-                    <h2 className="text-xl font-bold mb-4">Friends</h2>
-                    <ul>
-                        {friendProfiles.map((friend) => (
-                            friend ? <FriendProfile key={friend.id} user={friend} /> : null
-                        ))}
-                    </ul>
-                </div> */}
+                <Suspense fallback={<SkeletonCardListFriends />}>
+                    <CardListFriends />
+                </Suspense>
             </div>
         </div>
     );
