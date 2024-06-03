@@ -24,9 +24,7 @@ import { FormError } from "@/components/form-error";
 import { FormSuccess } from "@/components/form-success";
 import { createPost } from "@/actions/createpost";
 
-import {
-    PencilSquareIcon,
-} from '@heroicons/react/24/outline';
+import { PencilSquareIcon } from '@heroicons/react/24/outline';
 import { TbPhotoPlus } from "react-icons/tb"
 
 import Image from 'next/image'
@@ -79,8 +77,7 @@ export function CreateForm() {
                     if (data?.success) {
                         form.reset();
                         setSuccess(data.success);
-                        router.push('/profile')
-
+                        router.push('/profile');
                     }
                 })
                 .catch(() => setError("Algo salió mal al subir el post"));

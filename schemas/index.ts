@@ -1,10 +1,11 @@
+import { image } from "@nextui-org/react";
 import { UserRole } from "@prisma/client";
 import * as z from "zod";
 
 export const SettingsSchema = z.object({
     name: z.optional(z.string()),
     isTwoFactorEnabled: z.optional(z.boolean()),
-    // role: z.enum([UserRole.ADMIN, UserRole.USER]),
+    role: z.enum([UserRole.ADMIN, UserRole.USER]),
     email: z.optional(z.string().email()),
     password: z.optional(z.string().min(6)),
     newPassword: z.optional(z.string().min(6)),
@@ -111,8 +112,15 @@ export const CreateFormSchema = z.object({
 });
 
 export const UpdateFormSchema = z.object({
-    postId: z.string().nonempty("El ID de la publicación es obligatorio"),
-    userId: z.string().nonempty("El ID del usuario es obligatorio"),
+    id: z.string().nonempty("El ID de la publicación es obligatorio"),
     photo: z.string().optional(),
-    text: z.string().optional()
+    text: z.string().optional(),
+    createdAt: z.date()
 });
+export const SettingsProfileSchema = z.object({
+    birthdate: z.optional(z.string()),
+    country: z.optional(z.string()),
+    image: z.optional(z.string()),
+    imageTitle: z.optional(z.string()),
+});
+

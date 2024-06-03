@@ -56,3 +56,26 @@ export function SkeletonFrontPage() {
 
     );
 }
+export function SkeletonPostProfile({ showOptions }: { showOptions?: boolean }) {
+    return (
+        <div className="rounded-lg shadow-md bg-black/35 mb-4 p-4 animate-pulse">
+            <div className="flex items-center">
+                <div className="w-12 h-12 bg-gray-500 rounded-full"></div>
+                <div className="flex-1 ml-4">
+                    <div className="h-4 bg-gray-500 rounded w-1/3"></div>
+                    <div className="mt-2 h-4 bg-gray-500 rounded w-1/4"></div>
+                </div>
+                {showOptions && (
+                    <div className="ml-auto mr-3 rounded-full bg-gray-500 p-2 w-8 h-8"></div>
+                )}
+            </div>
+            <div className="flex flex-col mt-4">
+                <div className="h-4 bg-gray-500 rounded w-full mb-2"></div>
+                <div className="h-4 bg-gray-500 rounded w-5/6"></div>
+                <div className="relative flex justify-center w-full mt-2">
+                    <div className="relative w-full h-64 bg-gray-500 rounded"></div>
+                </div>
+            </div>
+        </div>
+    );
+}

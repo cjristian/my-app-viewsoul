@@ -10,8 +10,6 @@ export default  function PostFriends() {
 
   return (
     <div className="space-y-4">
-      {loading && <p className="text-white">Cargando...</p>}
-      {error && <p className="text-white">Error: {error}</p>}
       {friends.length === 0 && !loading && !error && (
         <p className="text-white">No tienes amigos :(</p>
       )}
