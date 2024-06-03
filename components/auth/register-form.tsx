@@ -276,8 +276,6 @@ export function RegisterForm() {
                                                             src={imageUrl}
                                                             alt="Foto de perfil"
                                                             layout="fill"
-                                                            layout="fill"
-
                                                             className="rounded-full"
                                                         />
                                                     </div>

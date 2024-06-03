@@ -18,10 +18,10 @@ export default function CardProfilePicture({ id }: PostProfileProps) {
                     {userFeatures.map((value) => (
                          <Image
                          key={value.id}
-                         src={value.imageTitle ? value.imageTitle : "https://dummyimage.com/800x400/cccccc/000000&text=Cover+Image"}
-                         alt="Foto de portada"
+                         src={value.imageTitle ? value.imageTitle : ""}
+                         alt="Añade una foto de portada"
                          layout="fill"
-                         className="rounded"
+                         className={`rounded ${!value.imageTitle && "bg-transparent/60"}`}
                          priority={true} 
                      />
 

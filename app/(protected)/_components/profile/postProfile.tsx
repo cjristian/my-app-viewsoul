@@ -8,9 +8,11 @@ import { getPostUser } from "@/data/postUser";
 import { getImagePath } from "@/utils/index";
 import { postFormatDate } from "../../_functions/formData";
 import EditPost from "../post/EditPost";
+import { SkeletonPostProfile } from "../skeletons";
 
 export default function PostProfile({ id, showOptions }: PostProfileProps & { showOptions?: boolean }) {
     const [userPosts, setUserPosts] = useState<Post[]>([]);
+    const [loading, setLoading] = useState(true); 
 
     useEffect(() => {
         async function fetchPosts() {
@@ -19,6 +21,8 @@ export default function PostProfile({ id, showOptions }: PostProfileProps & { sh
                 setUserPosts(posts);
             } catch (error) {
                 console.error("Error fetching posts:", error);
+            } finally {
+                setLoading(false); 
             }
         }
 
@@ -39,6 +43,7 @@ export default function PostProfile({ id, showOptions }: PostProfileProps & { sh
 
     return (
         <div className="w-full mt-4 h-full text-white bg-transparent">
+            {loading && <SkeletonPostProfile showOptions={showOptions} />}
             {userPosts.map((post) => (
                 <div key={post.id} className="rounded-lg shadow-md bg-black/35 mb-4">
                     <div className="flex items-center">
