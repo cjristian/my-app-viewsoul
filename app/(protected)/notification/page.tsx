@@ -1,4 +1,3 @@
-import React from "react";
 import { BellRing, Check } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -12,26 +11,26 @@ import {
 } from "@/components/ui/card";
 import { Switch } from "@/components/ui/switch";
 
-const notifications = [
-  {
-    title: "Your call has been confirmed.",
-    description: "1 hour ago",
-  },
-  {
-    title: "You have a new message!",
-    description: "1 hour ago",
-  },
-  {
-    title: "Your subscription is expiring soon!",
-    description: "2 hours ago",
-  },
-];
 
-type CardProps = React.ComponentProps<typeof Card>;
 
-const NotificationPage: React.FC<CardProps> = ({ className, ...props }) => {
+
+export default function NotifocationPage() {
+  const notifications = [
+    {
+      title: "Your call has been confirmed.",
+      description: "1 hour ago",
+    },
+    {
+      title: "You have a new message!",
+      description: "1 hour ago",
+    },
+    {
+      title: "Your subscription is expiring soon!",
+      description: "2 hours ago",
+    },
+  ];
   return (
-    <Card className={cn("w-[680px]", className)} {...props}>
+    <Card className={cn("w-[680px]")}>
       <CardHeader>
         <CardTitle>Notifications</CardTitle>
         <CardDescription>You have 3 unread messages.</CardDescription>
@@ -69,4 +68,3 @@ const NotificationPage: React.FC<CardProps> = ({ className, ...props }) => {
   );
 };
 
-export default NotificationPage;
