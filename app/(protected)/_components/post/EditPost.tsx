@@ -31,7 +31,7 @@ interface EditPostProps {
     id: string;
     postText: string;
     postImage: string;
-    createdAt: Date; 
+    createdAt: Date;
     onPostUpdate: (updatedPost: Post) => void;
     onPostDelete: (postId: string) => void;
 }
@@ -107,7 +107,7 @@ export default function EditPost({ id, postText, postImage, createdAt, onPostUpd
             if (data.success) {
                 setSuccess(data.success);
                 onPostDelete(id);
-                onOpenChange(); 
+                onOpenChange();
             }
         } catch (error) {
             setError("Something went wrong!");
