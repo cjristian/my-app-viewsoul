@@ -6,12 +6,8 @@ import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Form, FormField, FormControl, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { getPost } from "@/data/getPost";
-import { Post } from "@/interfaces/user";
-import Image from "next/image";
-import { useEffect, useState, useTransition } from "react";
+
 import { UpdateFormSchema } from "@/schemas";
-import { updatePost } from "@/actions/updatePost";
 
 export default function EditPost() {
     const form = useForm<z.infer<typeof UpdateFormSchema>>({
