@@ -16,14 +16,15 @@ export default function CardProfilePicture({ id }: PostProfileProps) {
             ) : (
                 <div className="absolute top-0 left-0 w-full h-80 rounded bg-gradient-to-r from-black to-red-950">
                     {userFeatures.map((value) => (
-                        <Image
-                            key={value.id}
-                            src={value.imageTitle ? value.imageTitle : "https://dummyimage.com/800x400/cccccc/000000&text=Cover+Image"}
-                            alt="Foto de portada"
-                            layout="fill"
-                            objectFit="cover"
-                            className="rounded"
-                        />
+                         <Image
+                         key={value.id}
+                         src={value.imageTitle ? value.imageTitle : "https://dummyimage.com/800x400/cccccc/000000&text=Cover+Image"}
+                         alt="Foto de portada"
+                         layout="fill"
+                         className="rounded"
+                         priority={true} 
+                     />
+
                     ))}
                 </div>
             )}

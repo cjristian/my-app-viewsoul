@@ -111,8 +111,8 @@ export const CreateFormSchema = z.object({
 });
 
 export const UpdateFormSchema = z.object({
-    postId: z.string().nonempty("El ID de la publicación es obligatorio"),
-    userId: z.string().nonempty("El ID del usuario es obligatorio"),
+    id: z.string().nonempty("El ID de la publicación es obligatorio"),
     photo: z.string().optional(),
-    text: z.string().optional()
+    text: z.string().optional(),
+    createdAt: z.date()
 });

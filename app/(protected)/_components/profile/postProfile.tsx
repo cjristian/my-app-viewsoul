@@ -1,3 +1,4 @@
+"use client";
 import { useEffect, useState } from "react";
 import Image from 'next/image'
 
@@ -6,15 +7,6 @@ import { PostProfileProps, Post } from "@/interfaces/user";
 import { getPostUser } from "@/data/postUser";
 import { getImagePath } from "@/utils/index";
 import { postFormatDate } from "../../_functions/formData";
-import { BsThreeDots } from 'react-icons/bs';
-import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuLabel,
-    DropdownMenuSeparator,
-    DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import EditPost from "../post/EditPost";
 
 export default function PostProfile({ id, showOptions }: PostProfileProps & { showOptions?: boolean }) {
@@ -33,6 +25,18 @@ export default function PostProfile({ id, showOptions }: PostProfileProps & { sh
         fetchPosts();
     }, [id]);
 
+    const handlePostUpdate = (updatedPost: Post) => {
+        setUserPosts(prevPosts =>
+            prevPosts.map(post => post.id === updatedPost.id ? updatedPost : post)
+        );
+    };
+
+    const handlePostDelete = (postId: string) => {
+        setUserPosts(prevPosts =>
+            prevPosts.filter(post => post.id !== postId)
+        );
+    };
+
     return (
         <div className="w-full mt-4 h-full text-white bg-transparent">
             {userPosts.map((post) => (
@@ -44,17 +48,14 @@ export default function PostProfile({ id, showOptions }: PostProfileProps & { sh
                         </p>
                         {showOptions && (
                             <div className="ml-auto mr-3 rounded-full bg-black p-0 md:p-1">
-                                <DropdownMenu>
-                                    <DropdownMenuTrigger>
-                                        <BsThreeDots className="text-white" />
-                                    </DropdownMenuTrigger>
-                                    <DropdownMenuContent>
-                                        <DropdownMenuLabel>Opciones</DropdownMenuLabel>
-                                        <DropdownMenuSeparator />
-                                        <EditPost />
-                                        <DropdownMenuItem>Borrar</DropdownMenuItem>
-                                    </DropdownMenuContent>
-                                </DropdownMenu>
+                                <EditPost
+                                    id={post.id}
+                                    postText={post.postText ?? ""}
+                                    postImage={post.postImage ?? ""}
+                                    createdAt={post.createdAt}
+                                    onPostUpdate={handlePostUpdate}
+                                    onPostDelete={handlePostDelete}
+                                />
                             </div>
                         )}
                     </div>
@@ -67,7 +68,6 @@ export default function PostProfile({ id, showOptions }: PostProfileProps & { sh
                                         src={getImagePath(post.postImage)}
                                         alt="Post Image"
                                         layout="fill"
-                                        objectFit="cover"
                                         priority={true}
                                         className="rounded"
                                     />

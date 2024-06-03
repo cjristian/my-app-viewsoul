@@ -10,19 +10,20 @@ export const updatePost = async (data: z.infer<typeof UpdateFormSchema>) => {
         return { error: "Datos de actualización incorrectos" };
     }
 
-    const { postId, userId, photo, text } = result.data;
+    const { id, photo, text, createdAt } = result.data;
 
     try {
         const updateData = {} as any;
         if (photo !== undefined) updateData.postImage = photo;
         if (text !== undefined) updateData.postText = text;
+        if (createdAt !== undefined) updateData.createdAt = createdAt;
 
         if (Object.keys(updateData).length === 0) {
             return { error: "No hay datos para actualizar" };
         }
 
         await db.post.update({
-            where: { id: postId, userId: userId },
+            where: { id: id },
             data: updateData,
         });
 
