@@ -53,7 +53,7 @@ export default function NotifocationPage() {
         </div>
         <div>
           {notifications.map((values) => (
-            <div>
+            <div key={values.id}>
               <p>{values.likerId} liked your post</p>
               <p>{values.postId}</p>
               <p>{postFormatDate(new Date(values.createdAt))}</p>
