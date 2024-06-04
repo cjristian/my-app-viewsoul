@@ -1,6 +1,5 @@
 import LeftNavbar from "@/app/(protected)/_components/LeftNavbar";
 import MainContainer from "@/app/(protected)/_components/MainContainer";
-import RightNavbar from "@/app/(protected)/_components/RightNavbar";
 import { auth } from "@/auth";
 import { SessionProvider } from "next-auth/react";
 
@@ -21,10 +20,6 @@ export default async function ProtectedLayaout({ children }: ProtectedLayaoutPro
             <MainContainer>
                 {children}
             </MainContainer>
-            {/* <div className="w-full flex-none md:w-64 "> */}
-            {/* <RightNavbar /> */}
-            {/* </div> */}
-
         </div>
         </SessionProvider>
     )

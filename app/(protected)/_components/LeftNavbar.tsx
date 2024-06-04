@@ -114,15 +114,6 @@ export default function LeftNavbar() {
                         </DropdownMenu>
                     </div>
                 </div>
-                {/* <div>
-                    <button
-                        className="flex h-[48px] w-full grow items-center justify-center gap-2 rounded-md p-3 text-sm font-medium hover:bg-white/10  md:flex-none md:justify-start md:p-2 md:px-3"
-                        onClick={onClick}
-                    >
-                        <ExitIcon height="32px" width="32px" className="w-6 text-white text-base" />
-                        <div className="hidden md:block text-white">Cerrar Sesión</div>
-                    </button>
-                </div> */}
             </div>
         </nav >
     )

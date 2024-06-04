@@ -9,6 +9,15 @@ export const SettingsSchema = z.object({
     email: z.optional(z.string().email()),
     password: z.optional(z.string().min(6)),
     newPassword: z.optional(z.string().min(6)),
+    image: z.optional(z.string()),
+    imageTitle: z.optional(z.string()),
+    lastname: z.optional(z.string()),
+    nickname: z.optional(z.string()),
+    birthdate: z.optional(z.string()),
+    country: z.optional(z.string()),
+    gender: z.enum(["MASCULINO", "FEMENINO", "OTRO"], {
+        message: "Selecciona un género válido"
+    }),
 })
     .refine((data) => {
         if (!data.name) {
