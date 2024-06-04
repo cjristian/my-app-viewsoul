@@ -19,6 +19,18 @@ export const giveLike = async (data: z.infer<typeof GiveLikeSchema>) => {
                 postId,
             }
         });
+
+        const post = await db.post.findUnique({ where: { id: postId } });
+        if (post) {
+            await db.notification.create({
+                data: {
+                    userId: post.userId, // dueño del post
+                    likerId: userId, // persona que le dio like
+                    postId: postId,
+                }
+            });
+        }
+
         return { success: "Like dado correctamente" };
     } catch (error) {
         if ((error as any).code === 'P2002') {

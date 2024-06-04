@@ -28,7 +28,7 @@ export interface Post {
     postText: string | null;
     postImage: string | null;
     createdAt: Date;
-    likes: Like[] ;
+    likes: Like[];
 }
 
 export interface ProfileUser {
@@ -46,4 +46,12 @@ export interface ProfileUser {
 }
 export interface PostProfileProps {
     id: string;
+}
+export interface Notification {
+    id: string;
+    userId: string;
+    likerId: string;
+    postId: string;
+    createdAt: Date;
+    read: boolean;
 }

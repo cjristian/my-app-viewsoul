@@ -137,3 +137,6 @@ export const GiveLikeSchema = z.object({
     userId: z.string(),
     postId: z.string(),
 });
+export const GetUserNotificationsSchema = z.object({
+    userId: z.string(),
+});

@@ -1,3 +1,4 @@
+"use client";
 import { BellRing, Check } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -10,25 +11,31 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Switch } from "@/components/ui/switch";
-
+import { useCurrentUser } from "@/hooks/use-current-user";
+import { getUserNotifications } from "@/data/getUserNotifications";
+import { useEffect, useState } from "react";
+import { Notification } from "@/interfaces/user";
+import { postFormatDate } from "../_functions/formData";
 
 
 
 export default function NotifocationPage() {
-  const notifications = [
-    {
-      title: "Your call has been confirmed.",
-      description: "1 hour ago",
-    },
-    {
-      title: "You have a new message!",
-      description: "1 hour ago",
-    },
-    {
-      title: "Your subscription is expiring soon!",
-      description: "2 hours ago",
-    },
-  ];
+  const user = useCurrentUser();
+  const [notifications, setNotifications] = useState<Notification[]>([]);
+  useEffect(() => {
+    const fetchNotifications = async () => {
+      if (user?.id) {
+        const notificaciones = await getUserNotifications({ userId: user?.id });
+        if (notificaciones.error) {
+          console.error(notificaciones.error);
+          setNotifications([]);
+        } else {
+          setNotifications(notificaciones.notifications as Notification[]);
+        }
+      }
+    }
+    fetchNotifications();
+  }, [user]);
   return (
     <Card className={cn("w-[680px]")}>
       <CardHeader>
@@ -45,16 +52,12 @@ export default function NotifocationPage() {
           <Switch />
         </div>
         <div>
-          {notifications.map((notification, index) => (
-            <div
-              key={index}
-              className="mb-4 grid grid-cols-[25px_1fr] items-start pb-4 last:mb-0 last:pb-0"
-            >
-              <span className="flex h-2 w-2 translate-y-1 rounded-full bg-sky-500" />
-              <div className="space-y-1">
-                <p className="text-sm font-medium leading-none">{notification.title}</p>
-                <p className="text-sm text-muted-foreground">{notification.description}</p>
-              </div>
+          {notifications.map((values) => (
+            <div>
+              <p>{values.likerId} liked your post</p>
+              <p>{values.postId}</p>
+              <p>{postFormatDate(new Date(values.createdAt))}</p>
+
             </div>
           ))}
         </div>

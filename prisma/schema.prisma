@@ -37,9 +37,10 @@ model User {
   isTwoFactorEnabled    Boolean                @default(false)
   twoFactorConfirmation TwoFactorConfirmation?
 
-  listFriends Friends[] @relation("Owner")
-  posts       Post[]
-  likes       Like[]
+  listFriends   Friends[]      @relation("Owner")
+  posts         Post[]
+  likes         Like[]
+  notifications Notification[] @relation("Like")
 }
 
 model Friends {
@@ -53,13 +54,14 @@ model Friends {
 }
 
 model Post {
-  id        String   @id @default(cuid())
-  userId    String   @map("id_user")
-  postText  String?
-  postImage String?
-  createdAt DateTime @default(now()) @map("created_at")
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  likes     Like[]
+  id           String         @id @default(cuid())
+  userId       String         @map("id_user")
+  postText     String?
+  postImage    String?
+  createdAt    DateTime       @default(now()) @map("created_at")
+  user         User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  likes        Like[]
+  Notification Notification[]
 
   @@map("post")
 }
@@ -73,6 +75,18 @@ model Like {
   post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
 
   @@unique([userId, postId])
+}
+
+model Notification {
+  id        String   @id @default(cuid())
+  userId    String
+  likerId   String
+  postId    String
+  createdAt DateTime @default(now())
+  read      Boolean  @default(false)
+
+  liker User @relation("Like", fields: [likerId], references: [id])
+  post  Post @relation(fields: [postId], references: [id], onDelete: Cascade)
 }
 
 model Account {
