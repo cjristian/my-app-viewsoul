@@ -133,3 +133,7 @@ export const SettingsProfileSchema = z.object({
     imageTitle: z.optional(z.string()),
 });
 
+export const GiveLikeSchema = z.object({
+    userId: z.string(),
+    postId: z.string(),
+});

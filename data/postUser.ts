@@ -18,6 +18,7 @@ export const getPostUser = async (id: string) => {
                 postText: true,
                 postImage: true,
                 createdAt: true,
+                likes:true
             },
         });
         return posts;

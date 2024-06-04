@@ -39,6 +39,7 @@ model User {
 
   listFriends Friends[] @relation("Owner")
   posts       Post[]
+  likes       Like[]
 }
 
 model Friends {
@@ -58,8 +59,20 @@ model Post {
   postImage String?
   createdAt DateTime @default(now()) @map("created_at")
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  likes     Like[]
 
   @@map("post")
+}
+
+model Like {
+  id        String   @id @default(cuid())
+  userId    String
+  postId    String
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, postId])
 }
 
 model Account {

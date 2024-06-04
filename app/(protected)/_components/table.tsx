@@ -6,7 +6,8 @@ import { useState, useEffect } from 'react';
 import { User } from '@/interfaces/user';
 import { useCurrentUser } from '@/hooks/use-current-user';
 import { fetchFilteredUser } from '@/data/fetchFilteredUser';
-import { createFieldsFriend } from '@/data/addFriends';
+import { createFieldsFriend } from '@/actions/addFriends';
+
 
 
 export default function UserTable({

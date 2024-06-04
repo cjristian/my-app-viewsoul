@@ -16,13 +16,21 @@ export type User = {
 export type ResponseError = {
     error: string;
 }
+export interface Like {
+    id: string;
+    userId: string;
+    postId: string;
+    createdAt: Date;
+}
 
 export interface Post {
     id: string;
     postText: string | null;
     postImage: string | null;
     createdAt: Date;
+    likes: Like[] ;
 }
+
 export interface ProfileUser {
     id: string;
     name: string | null,
