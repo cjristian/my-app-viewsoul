@@ -64,7 +64,9 @@ export const { handlers: { GET, POST }, auth, signIn, signOut, unstable_update
                 session.user.nickname = token.nickname
                 session.user.emailVerified = token.emailVerified
                 session.user.imageTitle = token.imageTitle
-
+                session.user.gender=token.gender
+                session.user.country=token.country
+                session.user.birthdate=token.birthdate
             }
 
 
@@ -91,6 +93,9 @@ export const { handlers: { GET, POST }, auth, signIn, signOut, unstable_update
             token.nickname = existingUser.nickname
             token.emailVerified = existingUser.emailVerified
             token.imageTitle = existingUser.imageTitle
+            token.gender=existingUser.gender
+            token.country=existingUser.country
+            token.birthdate=existingUser.birthdate
 
 
             return token;
