@@ -1,7 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
 import Image from 'next/image';
-
 import MiniCardProfile from "./miniCardProfile";
 import { PostProfileProps, Post } from "@/interfaces/user";
 import { getPostUser } from "@/data/postUser";
@@ -9,9 +8,10 @@ import { getImagePath } from "@/utils/index";
 import { postFormatDate } from "../../_functions/formData";
 import EditPost from "../post/EditPost";
 import { SkeletonPostProfile } from "../skeletons";
+import { useCurrentUser } from "@/hooks/use-current-user";
+import { getLikes } from "@/data/getLikes";
 import { giveLike } from "@/actions/giveLike";
 import { deleteLike } from "@/actions/deleteLike";
-import { useCurrentUser } from "@/hooks/use-current-user";
 
 export default function PostProfile({ id, showOptions }: PostProfileProps & { showOptions?: boolean }) {
     const user = useCurrentUser();
@@ -44,6 +44,29 @@ export default function PostProfile({ id, showOptions }: PostProfileProps & { sh
 
         fetchPosts();
     }, [id, user?.id]);
+
+    useEffect(() => {
+        const interval = setInterval(async () => {
+            const updatedLikeCounts: { [key: string]: number } = {};
+            for (const post of userPosts) {
+                const { likes } = await getLikes(post.id);
+                if (likes) {
+                    //@ts-ignore
+                    updatedLikeCounts[post.id] = likes.length;
+                } else {
+                    updatedLikeCounts[post.id] = 0; // O cualquier otro valor predeterminado
+                }
+            }
+            setLikeCounts(prevLikeCounts => ({
+                ...prevLikeCounts,
+                ...updatedLikeCounts
+            }));
+        }, 5000);
+    
+        return () => clearInterval(interval);
+    }, [userPosts]);
+    
+
 
     const handlePostUpdate = (updatedPost: Post) => {
         setUserPosts(prevPosts =>
@@ -89,7 +112,6 @@ export default function PostProfile({ id, showOptions }: PostProfileProps & { sh
                         ...prevLikeCounts,
                         [postId]: prevLikeCounts[postId] + 1
                     }));
-                    console.log(result.success);
                 }
             } else {
                 const result = await deleteLike({ userId: user.id, postId });
@@ -98,9 +120,8 @@ export default function PostProfile({ id, showOptions }: PostProfileProps & { sh
                 } else {
                     setLikeCounts(prevLikeCounts => ({
                         ...prevLikeCounts,
-                        [postId]: prevLikeCounts[postId] - 1
+                        [postId]: (prevLikeCounts[postId] ?? 0) - 1
                     }));
-                    console.log(result.success);
                 }
             }
         } catch (error) {
