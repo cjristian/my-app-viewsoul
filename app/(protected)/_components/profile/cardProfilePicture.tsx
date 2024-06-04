@@ -14,17 +14,17 @@ export default function CardProfilePicture({ id }: PostProfileProps) {
             {isLoading ? (
                 <SkeletonFrontPage />
             ) : (
-                <div className="absolute top-0 left-0 w-full h-80 rounded bg-gradient-to-r from-black to-red-950">
+                <div className="absolute top-0 left-0 w-full h-80 rounded bg-gradient-to-r from-black to-red-950 overflow-hidden">
                     {userFeatures.map((value) => (
-                         <Image
-                         key={value.id}
-                         src={value.imageTitle ? value.imageTitle : ""}
-                         alt="Añade una foto de portada"
-                         layout="fill"
-                         className={`rounded ${!value.imageTitle && "bg-transparent/60"}`}
-                         priority={true} 
-                     />
-
+                        <Image
+                            key={value.id}
+                            src={value.imageTitle ? value.imageTitle : ""}
+                            alt="Añade una foto de portada"
+                            layout="fill"
+                            objectFit="cover" // Asegura que la imagen cubra todo el espacio disponible sin distorsionarse
+                            className={`rounded ${!value.imageTitle && "bg-transparent/60"}`}
+                            priority={true}
+                        />
                     ))}
                 </div>
             )}

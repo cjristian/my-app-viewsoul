@@ -160,6 +160,7 @@ export default function PostProfile({ id, showOptions }: PostProfileProps & { sh
                                         alt="Post Image"
                                         layout="fill"
                                         priority={true}
+                                        objectFit="cover" 
                                         className="rounded"
                                     />
                                 </div>
