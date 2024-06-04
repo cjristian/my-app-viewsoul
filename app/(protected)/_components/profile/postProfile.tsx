@@ -49,12 +49,11 @@ export default function PostProfile({ id, showOptions }: PostProfileProps & { sh
         const interval = setInterval(async () => {
             const updatedLikeCounts: { [key: string]: number } = {};
             for (const post of userPosts) {
-                const { likes } = await getLikes(post.id);
-                if (likes) {
-                    //@ts-ignore
-                    updatedLikeCounts[post.id] = likes.length;
+                const response = await getLikes(post.id);
+                if (typeof response === 'number') {
+                    updatedLikeCounts[post.id] = response;
                 } else {
-                    updatedLikeCounts[post.id] = 0; // O cualquier otro valor predeterminado
+                    console.error(response.error);
                 }
             }
             setLikeCounts(prevLikeCounts => ({
@@ -62,10 +61,9 @@ export default function PostProfile({ id, showOptions }: PostProfileProps & { sh
                 ...updatedLikeCounts
             }));
         }, 5000);
-    
+
         return () => clearInterval(interval);
     }, [userPosts]);
-    
 
 
     const handlePostUpdate = (updatedPost: Post) => {
