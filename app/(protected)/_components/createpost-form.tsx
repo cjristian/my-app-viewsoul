@@ -106,7 +106,11 @@ export function CreateForm() {
                                 }}
                                 uploadPreset="gcghsfi6"
                                 options={{
-                                    maxFiles: 1
+                                    sources: ['local', 'url'],
+                                    maxFiles: 1,
+                                    clientAllowedFormats: ['jpeg', 'png', 'jpg', 'webp'],
+                                    maxImageFileSize: 9500000,
+
 
                                 }}
                             >

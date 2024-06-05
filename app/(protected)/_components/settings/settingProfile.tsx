@@ -109,7 +109,12 @@ export default function SettingUser() {
                                             }
                                         }}
                                         uploadPreset="gcghsfi6"
-                                        options={{ maxFiles: 1 }}
+                                        options={{
+                                            sources: ['local', 'url'],
+                                            maxFiles: 1,
+                                            clientAllowedFormats: ['jpeg', 'png', 'jpg', 'webp'],
+                                            maxImageFileSize: 9500000,
+                                        }}
                                     >
                                         {({ open }) => (
                                             <FormItem>

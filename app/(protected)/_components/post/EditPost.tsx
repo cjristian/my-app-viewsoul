@@ -169,7 +169,11 @@ export default function EditPost({ id, postText, postImage, createdAt, onPostUpd
                                                             }}
                                                             uploadPreset="gcghsfi6"
                                                             options={{
+                                                                sources: ['local', 'url'],
                                                                 maxFiles: 1,
+                                                                clientAllowedFormats: ['jpeg', 'png', 'jpg', 'webp'],
+                                                                maxImageFileSize: 9500000,
+
                                                             }}
                                                         >
                                                             {({ open }) => (

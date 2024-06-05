@@ -11,7 +11,7 @@ export default  function PostFriends() {
   return (
     <div className="space-y-4">
       {friends.length === 0 && !loading && !error && (
-        <p className="text-white">No tienes amigos :(</p>
+        <p className="text-white">¡Agrega gente en ViewSoul para ver sus post!</p>
       )}
       {friends.length > 0 && (
         <>

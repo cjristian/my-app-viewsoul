@@ -58,10 +58,10 @@ export default function TableFriends({ id }: PostProfileProps) {
                     <TableCell>
                         <Image
                             src={user.image ? user.image : "https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y&s=200"}
-                            alt="Foto de perfil"
-                            width={50}
-                            height={50}
-                            className="rounded-full border-4 border-white shadow-md"
+                            alt="Friend profile picture"
+                            width={40}
+                            height={40}
+                            className="object-cover w-10 h-10 rounded-full mr-2"
                         />
                     </TableCell>
                     <TableCell>
@@ -73,11 +73,11 @@ export default function TableFriends({ id }: PostProfileProps) {
 
                         </Link>
                     </TableCell>
-                    <TableCell className="hidden md:table-cell">{user.lastname?user.lastname:"Apellido  no disponible"}</TableCell>
+                    <TableCell className="hidden md:table-cell">{user.lastname ? user.lastname : "Apellido  no disponible"}</TableCell>
 
-                    <TableCell className="hidden md:table-cell">{user.country?user.country:"País no disponible"}</TableCell>
+                    <TableCell className="hidden md:table-cell">{user.country ? user.country : "País no disponible"}</TableCell>
 
-                    <TableCell >{user.birthdate?user.birthdate: "Fecha de nacimiento no disponible"}</TableCell>
+                    <TableCell >{user.birthdate ? user.birthdate : "Fecha de nacimiento no disponible"}</TableCell>
 
                     <TableCell>
                         <AlertDialog>
@@ -86,7 +86,7 @@ export default function TableFriends({ id }: PostProfileProps) {
                                 <AlertDialogHeader>
                                     <AlertDialogTitle className={`text-xl text-black`}>¿Estas seguro de borrar a {user.name} {user.lastname}?</AlertDialogTitle>
                                 </AlertDialogHeader>
-                            
+
                                 <AlertDialogFooter className='mt-30'>
                                     <AlertDialogCancel className={`text-1xl bg-white hover:bg-gray-400`}>Cancel</AlertDialogCancel>
                                     <AlertDialogAction onClick={() => handleDelete(user.id)} className={`text-1xl bg-red-600 hover:bg-red-400`} >Continar</AlertDialogAction>

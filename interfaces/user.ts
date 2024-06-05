@@ -6,6 +6,7 @@ export type User = {
     country: string | null;
     gender: string | null;
     email?: string | null;
+    nickname?: string | null;
     emailVerified: Date | null;
     image: string | null;
     password: string | null;

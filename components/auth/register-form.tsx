@@ -41,7 +41,7 @@ export function RegisterForm() {
     const [success, setSuccess] = useState<string | undefined>("");
     const [isPending, startTransition] = useTransition();
 
-    
+
     const form = useForm<z.infer<typeof RegisterSchema>>({
         resolver: zodResolver(RegisterSchema),
         defaultValues: {
@@ -262,7 +262,12 @@ export function RegisterForm() {
                                         }
                                     }}
                                     uploadPreset="gcghsfi6"
-                                    options={{ maxFiles: 1 }}
+                                    options={{
+                                        sources: ['local', 'url'],
+                                        maxFiles: 1,
+                                        clientAllowedFormats: ['jpeg', 'png', 'jpg', 'webp'],
+                                        maxImageFileSize: 9500000,
+                                    }}
                                 >
                                     {({ open }) => (
                                         <FormItem>
@@ -278,6 +283,7 @@ export function RegisterForm() {
                                                             src={imageUrl}
                                                             alt="Foto de perfil"
                                                             layout="fill"
+                                                            objectFit="cover"
                                                             className="rounded-full"
                                                         />
                                                     </div>
