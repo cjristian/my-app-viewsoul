@@ -8,7 +8,10 @@ export function useFriends() {
     const [error, setError] = useState<string | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
 
-    useEffect(() => {
+  
+    const refetch = () => {
+        setLoading(true); 
+        setError(null); 
         if (user?.id) {
             getListFriendIds(user.id)
                 .then(friends => {
@@ -27,11 +30,16 @@ export function useFriends() {
         } else {
             setLoading(false);
         }
+    };
+
+    useEffect(() => {
+        refetch(); 
     }, [user]);
 
     return {
         friends,
         loading,
-        error
+        error,
+        refetch 
     };
 }

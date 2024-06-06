@@ -8,29 +8,10 @@ import { useEffect, useState } from "react";
 import { Notification } from "@/interfaces/user";
 import { useCurrentUser } from "@/hooks/use-current-user";
 import { getUserNotifications } from "@/data/getUserNotifications";
+import { useNotifications } from "../hooks/useNotifications";
 
 export default function Menu() {
-    const user = useCurrentUser();
-    const [notifications, setNotifications] = useState<Notification[]>([]);
-    const fetchNotifications = async () => {
-        if (user?.id) {
-            const notificaciones = await getUserNotifications({ userId: user?.id });
-            if (notificaciones.error) {
-                console.error(notificaciones.error);
-                setNotifications([]);
-            } else {
-                setNotifications(notificaciones.notifications as Notification[]);
-            }
-        }
-    };
-    useEffect(() => {
-        fetchNotifications();
-        const interval = setInterval(() => {
-            fetchNotifications();
-        }, 5000);
-
-        return () => clearInterval(interval);
-    }, [user]);
+    const { notifications } = useNotifications()
     const pathname = usePathname();
     const contador = notifications.filter(notification => !notification.read).length;
 

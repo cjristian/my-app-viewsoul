@@ -125,7 +125,7 @@ export default function EditPost({ id, postText, postImage, createdAt, onPostUpd
                 isOpen={isOpen}
                 onOpenChange={onOpenChange}
                 placement="top-center"
-                className="bg-black/85 text-white"
+                className="bg-black text-white"
             >
                 <ModalContent>
                     {(onClose) => (

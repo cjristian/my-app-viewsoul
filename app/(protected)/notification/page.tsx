@@ -6,19 +6,14 @@ import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { useCurrentUser } from "@/hooks/use-current-user";
-import { getUserNotifications } from "@/data/getUserNotifications";
 import { useEffect, useState } from "react";
-import { Notification, ProfileUser } from "@/interfaces/user";
+import { ProfileUser } from "@/interfaces/user";
 import { fetchFriendProfiles } from "../_functions/fetchFriendProfiles";
 import Image from 'next/image';
-import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { Switch } from "@/components/ui/switch";
 import { readNotifications } from "@/actions/readNotifications";
 import {
   AlertDialog,
@@ -30,38 +25,27 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
 import { TrashIcon } from '@heroicons/react/24/outline';
 import { deleteNotification } from "@/actions/deleteNotification";
+import { useNotifications } from "../hooks/useNotifications";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
 
 export default function NotificationPage() {
-  const user = useCurrentUser();
-  const [notifications, setNotifications] = useState<Notification[]>([]);
   const [friendProfiles, setFriendProfiles] = useState<ProfileUser[]>([]);
+  
   const [loading, setLoading] = useState(true);
-  const [shownNotifications, setShownNotifications] = useState<Set<number>>(new Set());
 
-  const notify = (name: string) => toast(`${name} te dio like en tu post!`);
-
-  const fetchNotifications = async () => {
-    if (user?.id) {
-      const notificaciones = await getUserNotifications({ userId: user?.id });
-      if (notificaciones.error) {
-        console.error(notificaciones.error);
-        setNotifications([]);
-      } else {
-        setNotifications(notificaciones.notifications as Notification[]);
-      }
-    }
-  };
-
-  useEffect(() => {
-    fetchNotifications();
-    const interval = setInterval(() => {
-      fetchNotifications();
-    }, 10000);
-
-    return () => clearInterval(interval);
-  }, [user]);
+  const { notifications, fetchNotifications, setNotifications } = useNotifications();
 
   useEffect(() => {
     async function fetchProfiles() {
@@ -72,11 +56,8 @@ export default function NotificationPage() {
         setLoading(false);
       }
     }
-
     fetchProfiles();
   }, [notifications]);
-
-
 
   const markAllAsRead = async () => {
     const unreadNotifications = notifications.filter(notification => !notification.read);
@@ -85,8 +66,8 @@ export default function NotificationPage() {
   };
 
   const handleDelete = async (idNotification: string) => {
-    await deleteNotification(idNotification); 
-    setNotifications(notifications.filter(notification => notification.id !== idNotification)); 
+    await deleteNotification(idNotification);
+    setNotifications(notifications.filter(notification => notification.id !== idNotification));
   };
 
   const contador = notifications.filter(notification => !notification.read).length;
@@ -131,9 +112,48 @@ export default function NotificationPage() {
                     />
                     <div className="flex justify-between w-full">
                       <div>
-                        <p className="text-base md:text-lg">{friend.name} {friend.lastname} te dio like en tu post</p>
+                        <p className="text-base md:text-md">{friend.name} {friend.lastname} te dio like en tu post</p>
                         <p className="text-xs md:text-sm">@{friend.nickname ? friend.nickname : "No nickname"}</p>
                       </div>
+                      <Dialog>
+                        <DialogTrigger asChild>
+                          <Button variant="outline">Ver post</Button>
+                        </DialogTrigger>
+                        <DialogContent className="sm:max-w-[425px]">
+                          <DialogHeader>
+                            <DialogTitle>Edit profile</DialogTitle>
+                            <DialogDescription>
+                              Make changes to your profile here. Click save when you're done.
+                            </DialogDescription>
+                          </DialogHeader>
+                          <div className="grid gap-4 py-4">
+                            <div className="grid grid-cols-4 items-center gap-4">
+                              <Label htmlFor="name" className="text-right">
+                                Name
+                              </Label>
+                              <Input
+                                id="name"
+                                defaultValue="Pedro Duarte"
+                                className="col-span-3"
+                              />
+                            </div>
+                            <div className="grid grid-cols-4 items-center gap-4">
+                              <Label htmlFor="username" className="text-right">
+                                Username
+                              </Label>
+                              <Input
+                                id="username"
+                                defaultValue="@peduarte"
+                                className="col-span-3"
+                              />
+                            </div>
+                          </div>
+                          <DialogFooter>
+                            <Button type="submit">Save changes</Button>
+                          </DialogFooter>
+                        </DialogContent>
+                      </Dialog>
+
                       <AlertDialog>
                         <AlertDialogTrigger><TrashIcon className="w-5 hover:bg-red-600 rounded-lg" /></AlertDialogTrigger>
                         <AlertDialogContent>
