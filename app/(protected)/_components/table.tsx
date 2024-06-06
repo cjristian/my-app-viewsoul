@@ -9,6 +9,8 @@ import { fetchFilteredUser } from '@/data/fetchFilteredUser';
 import { createFieldsFriend } from '@/actions/addFriends';
 import Image from 'next/image';
 import { Button } from '@nextui-org/react';
+import router from 'next/router';
+
 
 
 export default function UserTable({
@@ -82,7 +84,7 @@ console.log(users);
                         <Link href={`/profile/${user.id}`} >
                             <h3 className="ml-2 font-semibold text-white"> {user.name} {user.lastname}</h3>
                         </Link>
-                        <p className="ml-2 text-sm text-gray-500">{user.nickname?`@${user.nickname}`:"No tiene nickname"}</p>
+                        <p className="ml-2 text-sm text-gray-500">{user.nickname?`@${user.nickname}`:" No tiene nickname"}</p>
                     </div>
                     <Button
                         onClick={() => handleFollow(user.id)}

@@ -84,7 +84,10 @@ export default function SettingUser() {
     useEffect(() => {
         form.setValue('imageTitle', imageTitle);
     }, [imageTitle, form]);
+
     const onSubmit = (values: z.infer<typeof SettingsSchema>) => {
+        setError(undefined); // Reset error state
+        setSuccess(undefined); // Reset success state
         startTransition(() => {
             settings(values)
                 .then((data) => {
@@ -99,8 +102,18 @@ export default function SettingUser() {
                 .catch(() => setError("Something went wrong!"));
         });
     };
+
+    const handleRemoveImage = () => {
+        setImageUrl("");
+        form.setValue("image", "");
+    };
+    const handleRemoveImageTitle = () => {
+        setImageTitle("");
+        form.setValue("imageTitle", "");
+    };
+
     return (
-        <Tabs defaultValue="account" className="w-[300px] md:w-[800px]">
+        <Tabs defaultValue="account" className="w-[310px] md:w-[800px]">
             <TabsList className="grid w-full grid-cols-2">
                 <TabsTrigger value="account">Fotos</TabsTrigger>
                 <TabsTrigger value="password">Detalles del perfil</TabsTrigger>
@@ -116,31 +129,41 @@ export default function SettingUser() {
                                     control={form.control}
                                     name="image"
                                     render={({ field }) => (
-                                        <><div className="flex items-center justify-between mt-2 mb-2">
-                                            <h1 className="text-xl font-semibold">Foto perfil</h1>
+                                        <>
+                                            <div className="flex items-center justify-between mt-2 mb-2">
+                                                <h1 className="text-xl font-semibold">Foto perfil</h1>
 
-                                            <CldUploadWidget
-                                                onSuccess={(result, { widget }) => {
-                                                    if (result.event === 'success') {
-                                                        widget.close();
-                                                        // @ts-ignore
-                                                        setImageUrl(result.info?.secure_url);
-                                                    }
-                                                }}
-                                                uploadPreset="gcghsfi6"
-                                                options={{ sources: ['local', 'url'],
-                                                maxFiles: 1,
-                                                clientAllowedFormats: ['jpeg', 'png', 'jpg', 'webp'],
-                                                maxImageFileSize: 9500000,
-}}
-                                            >
-                                                {({ open }) => (
-                                                    <Button className="ml-4" onClick={() => open()}>
-                                                        Editar
+                                                <CldUploadWidget
+                                                    onSuccess={(result, { widget }) => {
+                                                        if (result.event === 'success') {
+                                                            widget.close();
+                                                            //@ts-ignore
+                                                            setImageUrl(result.info?.secure_url);
+                                                            setSuccess(undefined); 
+                                                        }
+                                                    }}
+                                                    uploadPreset="gcghsfi6"
+                                                    options={{
+                                                        sources: ['local', 'url'],
+                                                        maxFiles: 1,
+                                                        clientAllowedFormats: ['jpeg', 'png', 'jpg', 'webp'],
+                                                        maxImageFileSize: 9500000,
+                                                    }}
+                                                >
+                                                    {({ open }) => (
+                                                        <Button className="ml-4 mr-2" onClick={() => open()}>
+                                                            Editar
+                                                        </Button>
+                                                    )}
+                                                </CldUploadWidget>
+                                                {imageUrl && (
+                                                    <Button onClick={handleRemoveImage}>
+                                                        Quitar Imagen
                                                     </Button>
                                                 )}
-                                            </CldUploadWidget></div><div className="flex justify-center mt-4">
-                                                <div className="relative w-36 h-36 border-2 border-dashed border-gray-300 rounded-full overflow-hidden">
+                                            </div>
+                                            <div className="flex justify-center mt-4">
+                                                <div className="relative w-36 h-36 border-2 border-dashed border-gray-300 rounded-full flex items-center justify-center overflow-hidden">
                                                     {imageUrl ? (
                                                         <Image
                                                             src={imageUrl}
@@ -151,7 +174,8 @@ export default function SettingUser() {
                                                         <TbPhotoPlus size={50} className="m-auto" />
                                                     )}
                                                 </div>
-                                            </div></>
+                                            </div>
+                                        </>
                                     )}
                                 />
                                 <hr className="md:hidden w-full h-1 border-none bg-gradient-to-r from-red-950 to-white mt-2" />
@@ -161,8 +185,7 @@ export default function SettingUser() {
                                     render={({ field }) => (
                                         <>
                                             <div className="flex items-center justify-between mt-9">
-
-                                                <h1 className="text-xl font-semibold">Foto de portada</h1>
+                                                <h1 className="text-base md:text-xl font-semibold">Foto de portada</h1>
 
                                                 <CldUploadWidget
                                                     onSuccess={(result, { widget }) => {
@@ -170,6 +193,7 @@ export default function SettingUser() {
                                                             widget.close();
                                                             //@ts-ignore
                                                             setImageTitle(result.info?.secure_url);
+                                                            setSuccess(undefined); 
                                                         }
                                                     }}
                                                     uploadPreset="gcghsfi6"
@@ -178,22 +202,26 @@ export default function SettingUser() {
                                                         maxFiles: 1,
                                                         clientAllowedFormats: ['jpeg', 'png', 'jpg', 'webp'],
                                                         maxImageFileSize: 9500000,
-
                                                     }}
                                                 >
                                                     {({ open }) => (
-                                                        <Button className="ml-4" onClick={() => open()}>
+                                                        <Button className="ml-4 mr-2" onClick={() => open()}>
                                                             Editar
                                                         </Button>
                                                     )}
                                                 </CldUploadWidget>
+                                                {imageTitle && (
+                                                    <Button onClick={handleRemoveImageTitle}>
+                                                        Quitar Imagen
+                                                    </Button>
+                                                )}
                                             </div>
                                             <div className="flex justify-center mt-4 mb-2">
-                                                <div className="relative w-96 h-36 border-2 border-dashed border-gray-300 rounded-lg ">
-                                                    {imageUrl ? (
+                                                <div className="relative w-96 h-36 border-2 border-dashed border-gray-300 rounded-lg flex items-center justify-center">
+                                                    {imageTitle ? (
                                                         <Image
-                                                            src={imageTitle ? imageTitle : "https://dummyimage.com/600x400/cccccc/808080?text=No+Image"}
-                                                            alt="Foto de perfil"
+                                                            src={imageTitle}
+                                                            alt="Foto de portada"
                                                             layout="fill"
                                                             className="object-cover"
                                                         />
@@ -206,7 +234,7 @@ export default function SettingUser() {
                                     )}
                                 />
                                 <FormError message={error} />
-                                <FormSuccess message={success} />
+                                {success && <FormSuccess message={success} />}
                                 <Button
                                     disabled={isPending}
                                     type="submit"
@@ -222,14 +250,14 @@ export default function SettingUser() {
 
             <TabsContent value="password">
                 <Card>
-                    <CardContent className="space-y-2 h-[400px] md:h-[500px]">
+                    <CardContent className=" h-[630px] md:h-[580px]">
                         <Form {...form}>
                             <form
                                 onSubmit={form.handleSubmit(onSubmit)}
                             >
                                 <hr className=" w-full h-1 border-none bg-gradient-to-r from-red-950 to-white mt-2" />
                                 <h1 className="text-xl font-semibold">Detalles</h1>
-                                <div className="grid grid-cols-2 gap-4 md:mt-9 mb-2">
+                                <div className="grid grid-cols-2 gap-4 md:mt-2 mb-2">
                                     <FormField
                                         control={form.control}
                                         name="name"
@@ -419,7 +447,7 @@ export default function SettingUser() {
                                             control={form.control}
                                             name="isTwoFactorEnabled"
                                             render={({ field }) => (
-                                                <FormItem className="flex flex-row items-center justify-between rounded-lg p-3 shadow-sm">
+                                                <FormItem className="md:flex md:flex-row md:items-center md:justify-between md:rounded-lg md:p-3 shadow-sm">
                                                     <div className="space-y-0.5">
                                                         <FormLabel>Two Factor Authentication</FormLabel>
                                                         <FormDescription className="text-gray-400">
@@ -439,7 +467,7 @@ export default function SettingUser() {
                                     )}
                                 </div>
                                 <FormError message={error} />
-                                <FormSuccess message={success} />
+                                {success && <FormSuccess message={success} />}
                                 <Button
                                     disabled={isPending}
                                     type="submit"
