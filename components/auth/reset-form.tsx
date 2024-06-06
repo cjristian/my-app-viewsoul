@@ -49,9 +49,9 @@ export function ResetForm() {
 
     return (
         <CardWrapper
-            headerLabel="Forgot your password?"
-            backButtonLabel="Back to login"
-            backButtonHref="/auth/login"
+            headerLabel="¿Olvidaste tu contraseña?"
+            backButtonLabel="Volver al login"
+            backButtonHref="/"
         >
             <Form {...form}>
                 <form
@@ -84,7 +84,7 @@ export function ResetForm() {
                         type="submit"
                         className="w-full"
                     >
-                        Send reset email
+                        Enviar email de recuperación
                     </Button>
                 </form>
             </Form>

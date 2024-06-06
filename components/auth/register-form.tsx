@@ -79,7 +79,7 @@ export function RegisterForm() {
         <CardWrapper
             headerLabel=""
             backButtonLabel="Ya tengo una cuenta"
-            backButtonHref="/auth/login"
+            backButtonHref="/"
             className="max-w-full md:max-w-2xl lg:max-w-4xl mx-auto p-4"
         >
             <Form {...form}>

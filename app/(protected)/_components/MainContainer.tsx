@@ -23,9 +23,6 @@ export default function ManinContainer({ children }: { children: React.ReactNode
                     <h1 className={`text-3xl  text-white ml-2`}>{title}</h1>
                 </div>
                 <hr className=" w-full h-1 border-none bg-gradient-to-r from-white to-red-950" />
-
-
-
                 <div className="mt-5 flex w-full justify-center ">
                     {children}
                 </div>

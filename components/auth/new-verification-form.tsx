@@ -39,9 +39,9 @@ export default function NewVerificationForm() {
     }, [onSubmit])
     return (
         <CardWrapper
-            headerLabel="Confirming your verification"
-            backButtonHref="/auth/login"
-            backButtonLabel="Back to login"
+            headerLabel="Confirmar tu verificación"
+            backButtonHref="/"
+            backButtonLabel="Volver al login"
         >
             <div className="flex items-center w-full justify-center">
                 {!success && !error && (

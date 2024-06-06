@@ -21,7 +21,7 @@ export function CardWrapper({
     showSocial,
     className
 }: CardWrapperProps) {
-    const cardClassName = className ? `${className} shadow-md` : "w-[300px] md:w-[400px] shadow-md";
+    const cardClassName = className ? `${className} shadow-lg` : "w-[300px] md:w-[400px] shadow-lg";
 
     return (
         <Card className={cardClassName}>
